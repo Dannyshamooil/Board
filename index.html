@@ -10,24 +10,25 @@
 :root{
   --navy:#0d1b2a;--bg:#f4f6fb;--white:#fff;--blue:#2563eb;--blue-lt:#dbeafe;
   --border:#e2e8f0;--text:#1e293b;--muted:#64748b;
-  --s1:#6366f1;--s2:#8b5cf6;--s3:#f59e0b;--s4:#0ea5e9;--s5:#f97316;--s6:#22c55e;
-  --panel-w:420px;
+  --s1:#6366f1;--s2:#8b5cf6;--s3:#f59e0b;--s4:#22c55e;--s5:#ef4444;
+  --panel-w:460px;
 }
 html,body{height:100%;overflow:hidden}
 body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
 
-/* ── TOPBAR ── */
 .topbar{flex-shrink:0;background:var(--navy);height:60px;display:flex;align-items:center;padding:0 20px;gap:16px;box-shadow:0 2px 12px rgba(0,0,0,.25);z-index:200}
 .logo{font-family:'DM Serif Display',serif;color:#fff;font-size:22px;letter-spacing:-.5px;white-space:nowrap}
 .logo span{color:#60a5fa}
 .tab-switcher{display:flex;background:rgba(255,255,255,.1);border-radius:8px;padding:3px;gap:2px;margin-left:12px}
 .tab-btn{background:none;border:none;color:rgba(255,255,255,.6);padding:6px 16px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
 .tab-btn.active{background:#fff;color:var(--navy)}
+.tab-count{display:inline-block;background:rgba(0,0,0,.1);border-radius:10px;padding:1px 7px;font-size:11px;font-weight:700;margin-left:6px}
+.tab-btn:not(.active) .tab-count{background:rgba(255,255,255,.15);color:#fff}
 .view-toggle{display:flex;gap:4px;margin-left:auto}
-.view-btn{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:13px}
+.view-btn{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:14px}
 .view-btn.active{background:#fff;color:var(--navy)}
+.view-btn:hover:not(.active){background:rgba(255,255,255,.2);color:#fff}
 
-/* ── FILTER BAR ── */
 .filter-bar{flex-shrink:0;background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .filter-input{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:180px;transition:border-color .15s}
 .filter-input:focus{border-color:var(--blue)}
@@ -39,18 +40,15 @@ body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;backgro
 .btn-simulate{background:linear-gradient(135deg,#f59e0b,#f97316);border:none;border-radius:8px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn-simulate:hover{opacity:.9;transform:translateY(-1px)}
 
-/* ── STATS STRIP ── */
 .stats-strip{flex-shrink:0;background:#fff;border-bottom:1px solid var(--border);padding:8px 20px;display:flex;overflow-x:auto}
 .stat-item{display:flex;flex-direction:column;align-items:center;padding:4px 22px;border-right:1px solid var(--border);min-width:100px}
 .stat-item:last-child{border-right:none}
 .stat-num{font-size:22px;font-weight:700;color:var(--text);line-height:1.1}
 .stat-label{font-size:10px;color:var(--muted);margin-top:2px;white-space:nowrap;text-transform:uppercase;letter-spacing:.4px}
 
-/* ── MAIN WRAPPER ── */
 .main-wrapper{flex:1;display:flex;overflow:hidden;min-height:0}
 .content-area{flex:1;overflow:hidden;min-width:0;transition:all .3s}
 
-/* ── KANBAN ── */
 .kanban-board{display:flex;gap:14px;padding:18px;height:100%;overflow-x:auto;overflow-y:hidden;align-items:flex-start}
 .kanban-col{background:#fff;border-radius:12px;min-width:265px;max-width:265px;display:flex;flex-direction:column;max-height:100%;border-top:4px solid;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .col-header{padding:12px 14px 8px;border-bottom:1px solid var(--border);flex-shrink:0}
@@ -59,9 +57,8 @@ body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;backgro
 .col-cards{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:0}
 .col-cards::-webkit-scrollbar{width:3px}
 .col-cards::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.empty-col{text-align:center;color:var(--muted);font-size:12px;padding:24px 10px}
+.empty-col{text-align:center;color:var(--muted);font-size:12px;padding:24px 10px;font-style:italic}
 
-/* ── AGENT CARD ── */
 .agent-card{background:var(--bg);border-radius:10px;padding:11px;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative}
 .agent-card:hover{border-color:var(--blue);box-shadow:0 4px 12px rgba(37,99,235,.12);transform:translateY(-1px)}
 .agent-card.selected{border-color:var(--blue);background:#eff6ff}
@@ -71,383 +68,883 @@ body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;backgro
 .card-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-email,.card-company{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .status-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.s-Pending{background:#fef3c7;color:#92400e}
-.s-Contacted{background:#dbeafe;color:#1e40af}
+.s-Pending{background:#eef2ff;color:#4338ca}
+.s-Contacted{background:#f3e8ff;color:#6b21a8}
+.s-InReview{background:#fef3c7;color:#92400e}
 .s-Approved{background:#dcfce7;color:#166534}
 .s-Rejected{background:#fee2e2;color:#991b1b}
 .card-meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
 .meta-tag{font-size:10px;background:#fff;border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--muted)}
 .plan-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:4px}
-.plan-ElitePro{background:#fef3c7;color:#92400e}
-.plan-Growth{background:#dbeafe;color:#1e40af}
-.plan-Starter{background:#f1f5f9;color:#475569}
-.card-docs{display:flex;gap:4px;margin-top:5px}
-.doc-chip{font-size:10px;padding:1px 6px;border-radius:4px;display:flex;align-items:center;gap:2px}
-.doc-done{background:#dcfce7;color:#166534}
-.doc-pend{background:#f1f5f9;color:#94a3b8}
-.ready-badge{margin-top:7px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:6px;text-align:center;letter-spacing:.3px}
-.updated-badge{position:absolute;top:-7px;right:-7px;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.3px;box-shadow:0 2px 6px rgba(245,158,11,.45)}
+.plan-Pro{background:#fef3c7;color:#92400e}
+.plan-Basic{background:#f1f5f9;color:#475569}
+.note-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--s3)}
 
-/* ── LIST VIEW ── */
 .list-view{padding:18px;height:100%;overflow-y:auto;display:none}
 .list-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .list-table th{background:var(--bg);padding:9px 13px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
 .list-table td{padding:9px 13px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle}
 .list-table tr:last-child td{border-bottom:none}
-.list-table tbody tr:hover td{background:#f8faff;cursor:pointer}
+.list-table tbody tr{cursor:pointer}
+.list-table tbody tr:hover td{background:#f8faff}
 .list-table tbody tr.sel td{background:#eff6ff}
 .step-dot{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700}
 
-/* show list view when active */
 body.list-mode .kanban-board{display:none}
 body.list-mode .list-view{display:block}
+
+.roster-view{padding:18px;height:100%;overflow-y:auto;display:none}
+body.roster-tab .kanban-board,
+body.roster-tab .list-view{display:none}
+body.roster-tab .roster-view{display:block}
+body.roster-tab .view-toggle{visibility:hidden}
+
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.roster-card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);border:2px solid transparent;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.roster-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--s4),#16a34a)}
+.roster-card:hover{border-color:var(--s4);box-shadow:0 6px 16px rgba(34,197,94,.14);transform:translateY(-2px)}
+.roster-card.selected{border-color:var(--s4);background:#f0fdf4}
+.roster-top{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.roster-avatar{width:48px;height:48px;font-size:17px}
+.roster-name{font-size:15px;font-weight:600}
+.roster-company{font-size:12px;color:var(--muted);margin-top:1px}
+.roster-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:12px;border-top:1px solid var(--border)}
+.roster-stat{text-align:center}
+.roster-stat-num{font-size:16px;font-weight:700;color:var(--text)}
+.roster-stat-label{font-size:9px;text-transform:uppercase;color:var(--muted);letter-spacing:.4px;margin-top:2px}
+.top-perf{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:10px;letter-spacing:.3px;box-shadow:0 2px 6px rgba(245,158,11,.4)}
+.roster-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.roster-empty-icon{font-size:42px;margin-bottom:12px;opacity:.3}
+.roster-empty-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px}
+.roster-empty-text{font-size:13px}
+
+.panel-overlay{position:fixed;inset:0;background:rgba(13,27,42,.4);opacity:0;pointer-events:none;transition:opacity .25s;z-index:90}
+.side-panel{position:fixed;top:60px;right:0;bottom:0;width:var(--panel-w);max-width:95vw;background:#fff;box-shadow:-8px 0 30px rgba(0,0,0,.12);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:100;display:flex;flex-direction:column;overflow:hidden}
+body.panel-open .side-panel{transform:translateX(0)}
+body.panel-open .panel-overlay{opacity:1;pointer-events:auto}
+.panel-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;flex-shrink:0}
+.panel-avatar{width:52px;height:52px;font-size:18px;flex-shrink:0}
+.panel-name-block{flex:1;min-width:0}
+.panel-name{font-size:17px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.panel-email{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.panel-close{background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.panel-close:hover{background:var(--bg);color:var(--text)}
+.panel-body{flex:1;overflow-y:auto;padding:20px}
+.panel-section{margin-bottom:18px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.panel-section-header{padding:10px 14px;background:var(--bg);display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.panel-section-header .step-num{background:#fff;border:1px solid var(--border);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:var(--text)}
+.panel-section-body{padding:6px 14px}
+.panel-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:13px;border-bottom:1px dashed var(--border);gap:12px;min-height:36px}
+.panel-row:last-child{border-bottom:none}
+.panel-row-label{color:var(--muted);flex-shrink:0}
+.panel-row-val{font-weight:500;text-align:right;word-break:break-word;max-width:65%}
+.panel-row-val.empty{color:#cbd5e1;font-style:italic;font-weight:400}
+
+/* Inline editable */
+.editable{cursor:pointer;border-radius:5px;padding:3px 7px;margin:-3px -7px;transition:all .12s;position:relative}
+.editable:hover{background:#eff6ff;box-shadow:inset 0 0 0 1px #bfdbfe}
+.editable::after{content:"✎";opacity:0;font-size:10px;color:var(--blue);margin-left:6px;transition:opacity .12s}
+.editable:hover::after{opacity:.7}
+.edit-input,.edit-select{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:4px 7px;border:1px solid var(--blue);border-radius:5px;outline:none;background:#fff;color:var(--text);width:100%;max-width:240px;text-align:right}
+.edit-select{text-align:left}
+
+/* Status check pills */
+.check-on{display:inline-flex;align-items:center;gap:4px;color:#166534;font-weight:600;font-size:12px;background:#dcfce7;padding:2px 8px;border-radius:6px}
+.check-off{display:inline-flex;align-items:center;gap:4px;color:#991b1b;font-weight:600;font-size:12px;background:#fee2e2;padding:2px 8px;border-radius:6px}
+
+/* Notes textarea */
+.notes-area{width:100%;min-height:90px;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;color:var(--text);outline:none;resize:vertical;background:#fff;transition:all .15s}
+.notes-area:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.notes-area::placeholder{color:#cbd5e1}
+.notes-meta{font-size:10px;color:var(--muted);margin-top:6px;text-align:right}
+
+/* Social media list */
+.social-list{display:flex;flex-direction:column;gap:4px;padding:6px 0}
+.social-row{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:8px;transition:background .15s}
+.social-row:hover{background:var(--bg)}
+.social-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0;letter-spacing:-.3px}
+.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.fb{background:#1877f2}
+.li{background:#0a66c2}
+.tw{background:#000}
+.tt{background:#000}
+.yt{background:#ff0000}
+.ws{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.social-text{flex:1;font-size:12px;min-width:0}
+.social-text .platform{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;display:block;line-height:1.1;margin-bottom:1px}
+.social-handle{font-weight:500;cursor:pointer;border-radius:4px;padding:1px 4px;margin:-1px -4px;display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:all .12s}
+.social-handle:hover{background:#eff6ff;box-shadow:inset 0 0 0 1px #bfdbfe}
+.social-handle.empty{color:#cbd5e1;font-style:italic;font-weight:400}
+.social-link{color:var(--blue);text-decoration:none;font-size:13px;flex-shrink:0;padding:4px 6px;border-radius:6px;transition:background .15s}
+.social-link:hover{background:var(--blue-lt)}
+
+.stepper{display:flex;align-items:center;gap:4px;margin-top:8px}
+.step{flex:1;height:6px;background:var(--bg);border-radius:3px}
+.step.done{background:var(--s4)}
+.step.current{background:var(--blue)}
+.step.rejected{background:var(--s5)}
+.stepper-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.3px}
+
+.panel-actions{padding:16px 20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:8px;flex-shrink:0;background:var(--bg)}
+.action-row{display:flex;gap:8px}
+.action-btn{flex:1;padding:9px 12px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px}
+.action-btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-advance{background:var(--blue);color:#fff}
+.btn-advance:hover:not(:disabled){background:#1d4ed8}
+.btn-approve{background:var(--s4);color:#fff}
+.btn-approve:hover:not(:disabled){background:#16a34a}
+.btn-reject{background:#fff;color:var(--s5);border:1px solid #fecaca}
+.btn-reject:hover:not(:disabled){background:#fef2f2}
+.btn-reset{background:#fff;color:var(--muted);border:1px solid var(--border)}
+.btn-reset:hover:not(:disabled){background:var(--bg);color:var(--text)}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:#fff;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.25);opacity:0;transition:all .3s;z-index:300;pointer-events:none;display:flex;align-items:center;gap:8px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast-icon{width:18px;height:18px;border-radius:50%;background:var(--s4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+
+.edit-hint{font-size:10px;color:var(--muted);font-style:italic;text-align:center;padding:6px;background:#eff6ff;border-radius:6px;margin-bottom:14px}
 </style>
 </head>
 <body>
 
-<!-- ── TOPBAR ── -->
 <div class="topbar">
   <div class="logo">Voro<span>.</span></div>
-  <div class="tab-switcher">
-    <button class="tab-btn active">Recruitment</button>
-    <button class="tab-btn">Onboarding</button>
-    <button class="tab-btn">Active Agents</button>
+  <div class="tab-switcher" id="tabSwitcher">
+    <button class="tab-btn active" data-tab="recruitment">Recruitment <span class="tab-count" id="tabCountRec">0</span></button>
+    <button class="tab-btn" data-tab="roster">Active Roster <span class="tab-count" id="tabCountRos">0</span></button>
   </div>
-  <div class="view-toggle">
+  <div class="view-toggle" id="viewToggle">
     <button class="view-btn active" data-view="kanban" title="Kanban view">▦</button>
     <button class="view-btn" data-view="list" title="List view">☰</button>
   </div>
 </div>
 
-<!-- ── FILTER BAR ── -->
 <div class="filter-bar">
-  <input class="filter-input" placeholder="Search name or email…">
-  <input class="filter-input" placeholder="Company">
-  <input class="filter-input" placeholder="Plan">
-  <span class="result-count">12 of 12 agents</span>
+  <input class="filter-input" id="searchInput" placeholder="Search name or email…">
+  <input class="filter-input" id="companyInput" placeholder="Brokerage / company">
+  <input class="filter-input" id="planInput" placeholder="Plan">
+  <span class="result-count" id="resultCount"></span>
   <div class="filter-actions">
-    <button class="btn-clear">Clear filters</button>
-    <button class="btn-simulate">⚡ Simulate batch</button>
+    <button class="btn-clear" id="clearBtn">Clear filters</button>
+    <button class="btn-simulate" id="simulateBtn">⚡ Simulate batch</button>
   </div>
 </div>
 
-<!-- ── STATS STRIP ── -->
-<div class="stats-strip">
-  <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Total</div></div>
-  <div class="stat-item"><div class="stat-num" style="color:var(--s1)">3</div><div class="stat-label">Pending</div></div>
-  <div class="stat-item"><div class="stat-num" style="color:var(--s2)">2</div><div class="stat-label">Contacted</div></div>
-  <div class="stat-item"><div class="stat-num" style="color:var(--s3)">2</div><div class="stat-label">In Review</div></div>
-  <div class="stat-item"><div class="stat-num" style="color:var(--s4)">2</div><div class="stat-label">Docs</div></div>
-  <div class="stat-item"><div class="stat-num" style="color:var(--s6)">3</div><div class="stat-label">Approved</div></div>
-  <div class="stat-item"><div class="stat-num">68%</div><div class="stat-label">Conversion</div></div>
-</div>
+<div class="stats-strip" id="statsStrip"></div>
 
-<!-- ── MAIN ── -->
 <div class="main-wrapper">
   <div class="content-area">
-
-    <!-- KANBAN -->
-    <div class="kanban-board">
-
-      <div class="kanban-col" style="border-top-color:var(--s1)">
-        <div class="col-header">
-          <div class="col-title" style="color:var(--s1)">Pending Outreach</div>
-          <div class="col-count">3</div>
-        </div>
-        <div class="col-cards">
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s1)">MR</div>
-              <div class="card-info">
-                <div class="card-name">Maya Rodriguez</div>
-                <div class="card-email">maya.r@harbor.co</div>
-              </div>
-              <div class="status-pill s-Pending">Pending</div>
-            </div>
-            <div class="card-company">Harbor Realty · Miami, FL</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-ElitePro">Elite Pro</span>
-              <span class="meta-tag">5+ yrs</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s4)">JT</div>
-              <div class="card-info">
-                <div class="card-name">James Tanaka</div>
-                <div class="card-email">j.tanaka@pacific.io</div>
-              </div>
-              <div class="status-pill s-Pending">Pending</div>
-            </div>
-            <div class="card-company">Pacific Group · Seattle, WA</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-Growth">Growth</span>
-              <span class="meta-tag">Commercial</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s5)">AK</div>
-              <div class="card-info">
-                <div class="card-name">Aisha Khan</div>
-                <div class="card-email">aisha@bluepine.com</div>
-              </div>
-              <div class="status-pill s-Pending">Pending</div>
-            </div>
-            <div class="card-company">Blue Pine Holdings · Austin, TX</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-Starter">Starter</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="kanban-col" style="border-top-color:var(--s2)">
-        <div class="col-header">
-          <div class="col-title" style="color:var(--s2)">Contacted</div>
-          <div class="col-count">2</div>
-        </div>
-        <div class="col-cards">
-
-          <div class="agent-card selected">
-            <div class="updated-badge">UPDATED</div>
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s2)">DC</div>
-              <div class="card-info">
-                <div class="card-name">Diego Castillo</div>
-                <div class="card-email">d.castillo@nu.com</div>
-              </div>
-              <div class="status-pill s-Contacted">Contacted</div>
-            </div>
-            <div class="card-company">Nu Properties · Phoenix, AZ</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-ElitePro">Elite Pro</span>
-              <span class="meta-tag">Replied 2d ago</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s3)">SP</div>
-              <div class="card-info">
-                <div class="card-name">Sarah Park</div>
-                <div class="card-email">sarah.p@meridian.us</div>
-              </div>
-              <div class="status-pill s-Contacted">Contacted</div>
-            </div>
-            <div class="card-company">Meridian Realty · Boston, MA</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-Growth">Growth</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="kanban-col" style="border-top-color:var(--s3)">
-        <div class="col-header">
-          <div class="col-title" style="color:var(--s3)">In Review</div>
-          <div class="col-count">2</div>
-        </div>
-        <div class="col-cards">
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s3)">RB</div>
-              <div class="card-info">
-                <div class="card-name">Rachel Brennan</div>
-                <div class="card-email">r.brennan@oak.co</div>
-              </div>
-              <div class="status-pill s-Contacted">Reviewing</div>
-            </div>
-            <div class="card-company">Oakridge · Denver, CO</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-ElitePro">Elite Pro</span>
-              <span class="meta-tag">Luxury</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s6)">TO</div>
-              <div class="card-info">
-                <div class="card-name">Tomás Oliveira</div>
-                <div class="card-email">tomas@lumen.re</div>
-              </div>
-              <div class="status-pill s-Contacted">Reviewing</div>
-            </div>
-            <div class="card-company">Lumen Real Estate · Chicago, IL</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-Growth">Growth</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="kanban-col" style="border-top-color:var(--s4)">
-        <div class="col-header">
-          <div class="col-title" style="color:var(--s4)">Documents</div>
-          <div class="col-count">2</div>
-        </div>
-        <div class="col-cards">
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s4)">EW</div>
-              <div class="card-info">
-                <div class="card-name">Elena Whitaker</div>
-                <div class="card-email">elena.w@summit.co</div>
-              </div>
-              <div class="status-pill s-Contacted">Docs</div>
-            </div>
-            <div class="card-company">Summit Properties · Portland, OR</div>
-            <div class="card-docs">
-              <span class="doc-chip doc-done">✓ License</span>
-              <span class="doc-chip doc-done">✓ W-9</span>
-              <span class="doc-chip doc-pend">○ E&amp;O</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s5)">NF</div>
-              <div class="card-info">
-                <div class="card-name">Noah Fischer</div>
-                <div class="card-email">noah@crestview.us</div>
-              </div>
-              <div class="status-pill s-Contacted">Docs</div>
-            </div>
-            <div class="card-company">Crestview Group · Nashville, TN</div>
-            <div class="card-docs">
-              <span class="doc-chip doc-done">✓ License</span>
-              <span class="doc-chip doc-pend">○ W-9</span>
-              <span class="doc-chip doc-pend">○ E&amp;O</span>
-            </div>
-            <div class="ready-badge">READY FOR REVIEW</div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="kanban-col" style="border-top-color:var(--s6)">
-        <div class="col-header">
-          <div class="col-title" style="color:var(--s6)">Approved</div>
-          <div class="col-count">3</div>
-        </div>
-        <div class="col-cards">
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s6)">LP</div>
-              <div class="card-info">
-                <div class="card-name">Liam Patel</div>
-                <div class="card-email">liam.p@sterling.co</div>
-              </div>
-              <div class="status-pill s-Approved">Approved</div>
-            </div>
-            <div class="card-company">Sterling Realty · NYC, NY</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-ElitePro">Elite Pro</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s2)">CV</div>
-              <div class="card-info">
-                <div class="card-name">Camille Voss</div>
-                <div class="card-email">c.voss@anchor.io</div>
-              </div>
-              <div class="status-pill s-Approved">Approved</div>
-            </div>
-            <div class="card-company">Anchor Group · San Diego, CA</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-Growth">Growth</span>
-            </div>
-          </div>
-
-          <div class="agent-card">
-            <div class="card-top">
-              <div class="avatar" style="background:var(--s1)">JM</div>
-              <div class="card-info">
-                <div class="card-name">Jordan Mehta</div>
-                <div class="card-email">j.mehta@vertex.us</div>
-              </div>
-              <div class="status-pill s-Approved">Approved</div>
-            </div>
-            <div class="card-company">Vertex Realty · Atlanta, GA</div>
-            <div class="card-meta">
-              <span class="plan-badge plan-Starter">Starter</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="kanban-col" style="border-top-color:#ef4444">
-        <div class="col-header">
-          <div class="col-title" style="color:#ef4444">Rejected</div>
-          <div class="col-count">0</div>
-        </div>
-        <div class="col-cards">
-          <div class="empty-col">No rejected agents</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- LIST VIEW -->
-    <div class="list-view">
-      <table class="list-table">
-        <thead>
-          <tr>
-            <th>Step</th><th>Name</th><th>Company</th><th>Plan</th><th>Status</th><th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="step-dot" style="background:var(--s1)">1</span></td><td>Maya Rodriguez</td><td>Harbor Realty</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Pending">Pending</span></td><td>maya.r@harbor.co</td></tr>
-          <tr class="sel"><td><span class="step-dot" style="background:var(--s2)">2</span></td><td>Diego Castillo</td><td>Nu Properties</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Contacted">Contacted</span></td><td>d.castillo@nu.com</td></tr>
-          <tr><td><span class="step-dot" style="background:var(--s3)">3</span></td><td>Rachel Brennan</td><td>Oakridge</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Contacted">Reviewing</span></td><td>r.brennan@oak.co</td></tr>
-          <tr><td><span class="step-dot" style="background:var(--s4)">4</span></td><td>Elena Whitaker</td><td>Summit Properties</td><td><span class="plan-badge plan-Growth">Growth</span></td><td><span class="status-pill s-Contacted">Docs</span></td><td>elena.w@summit.co</td></tr>
-          <tr><td><span class="step-dot" style="background:var(--s6)">5</span></td><td>Liam Patel</td><td>Sterling Realty</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Approved">Approved</span></td><td>liam.p@sterling.co</td></tr>
-        </tbody>
-      </table>
-    </div>
-
+    <div class="kanban-board" id="kanbanBoard"></div>
+    <div class="list-view" id="listView"></div>
+    <div class="roster-view" id="rosterView"></div>
   </div>
 </div>
 
+<div class="panel-overlay" id="panelOverlay"></div>
+<aside class="side-panel" id="sidePanel" aria-hidden="true">
+  <div class="panel-header" id="panelHeader"></div>
+  <div class="panel-body" id="panelBody"></div>
+  <div class="panel-actions" id="panelActions"></div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
 <script>
-// View toggle (kanban / list)
-document.querySelectorAll('.view-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.body.classList.toggle('list-mode', btn.dataset.view==='list');
+const STATUSES = ['Pending', 'Contacted', 'In Review', 'Approved', 'Rejected'];
+const PIPELINE = ['Pending', 'Contacted', 'In Review', 'Approved'];
+const COL_COLORS = {
+  'Pending':'var(--s1)','Contacted':'var(--s2)','In Review':'var(--s3)',
+  'Approved':'var(--s4)','Rejected':'var(--s5)'
+};
+const PALETTE = ['#6366f1','#8b5cf6','#0ea5e9','#22c55e','#f59e0b','#f97316','#ef4444','#14b8a6','#ec4899'];
+
+const US_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+const SPECIALTIES = ['Residential','Commercial','Luxury','Investment','Land','Multifamily','Industrial'];
+const PLANS = ['Basic','Pro'];
+const BILLING = ['Monthly','Annual','—'];
+
+const SEED = [
+  {firstName:'Maya',lastName:'Rodriguez',business:'Maya Rodriguez Realty Group',email:'maya.r@harbor.co',phone:'+1 305-555-0142',
+   address:'1820 Brickell Ave',city:'Miami',state:'FL',zip:'33129',
+   license:'FL-SL-3456712',licenseState:'FL',licenseExp:'2027-04-30',mls:'Miami MLS',board:'Miami Association of Realtors',prevBrokerage:'Harbor Realty',years:5,specialty:'Luxury',
+   icaSigned:null,w9OnFile:false,plan:'Pro',billing:'Monthly',payment:null,
+   social:{instagram:'maya.realestate',facebook:'maya.rodriguez.realtor',linkedin:'maya-rodriguez-fl',twitter:'',tiktok:'maya.miami',youtube:'',website:'mayarodriguez.com'},
+   status:'Pending',notes:''},
+  {firstName:'James',lastName:'Tanaka',business:'',email:'j.tanaka@pacific.io',phone:'+1 206-555-0188',
+   address:'1500 4th Ave',city:'Seattle',state:'WA',zip:'98101',
+   license:'WA-25698',licenseState:'WA',licenseExp:'2026-11-12',mls:'NWMLS',board:'Seattle King County Realtors',prevBrokerage:'Pacific Group',years:3,specialty:'Commercial',
+   icaSigned:null,w9OnFile:false,plan:'Basic',billing:'—',payment:null,
+   social:{instagram:'',facebook:'',linkedin:'james-tanaka-cre',twitter:'jtanaka_cre',tiktok:'',youtube:'',website:''},
+   status:'Pending',notes:''},
+  {firstName:'Aisha',lastName:'Khan',business:'',email:'aisha@bluepine.com',phone:'+1 512-555-0173',
+   address:'700 Lavaca St',city:'Austin',state:'TX',zip:'78701',
+   license:'TX-678234',licenseState:'TX',licenseExp:'2026-08-21',mls:'ABoR MLS',board:'Austin Board of Realtors',prevBrokerage:'Blue Pine Holdings',years:1,specialty:'Residential',
+   icaSigned:null,w9OnFile:false,plan:'Basic',billing:'—',payment:null,
+   social:{instagram:'aisha.atxhomes',facebook:'',linkedin:'',twitter:'',tiktok:'aisha.atx',youtube:'',website:''},
+   status:'Pending',notes:''},
+  {firstName:'Diego',lastName:'Castillo',business:'Castillo Luxury Group',email:'d.castillo@nu.com',phone:'+1 602-555-0119',
+   address:'2390 E Camelback Rd',city:'Phoenix',state:'AZ',zip:'85016',
+   license:'AZ-SA-712984',licenseState:'AZ',licenseExp:'2027-01-15',mls:'ARMLS',board:'Phoenix Realtors',prevBrokerage:'Nu Properties',years:7,specialty:'Luxury',
+   icaSigned:'2026-04-21',w9OnFile:false,plan:'Pro',billing:'Annual',payment:null,
+   social:{instagram:'diego.luxuryaz',facebook:'diego.castillo.realestate',linkedin:'diego-castillo-az',twitter:'',tiktok:'',youtube:'diegoCastilloAZ',website:'diegoaz.com'},
+   status:'Contacted',notes:'Spoke with Diego on 4/22 — strong portfolio of $2M+ listings, eager to move on Pro plan. Following up after ICA review.'},
+  {firstName:'Sarah',lastName:'Park',business:'Park Real Estate Advisors',email:'sarah.p@meridian.us',phone:'+1 617-555-0167',
+   address:'200 Berkeley St',city:'Boston',state:'MA',zip:'02116',
+   license:'MA-9923144',licenseState:'MA',licenseExp:'2026-09-30',mls:'MLS PIN',board:'Greater Boston Real Estate Board',prevBrokerage:'Meridian Realty',years:4,specialty:'Residential',
+   icaSigned:'2026-04-25',w9OnFile:false,plan:'Pro',billing:'Monthly',payment:null,
+   social:{instagram:'sarahpark.boston',facebook:'',linkedin:'sarah-park-realty',twitter:'',tiktok:'',youtube:'',website:''},
+   status:'Contacted',notes:''},
+  {firstName:'Rachel',lastName:'Brennan',business:'Brennan Luxury Properties',email:'r.brennan@oak.co',phone:'+1 720-555-0102',
+   address:'1660 Lincoln St',city:'Denver',state:'CO',zip:'80264',
+   license:'CO-FA-100431',licenseState:'CO',licenseExp:'2027-06-01',mls:'REcolorado',board:'Denver Metro Association of Realtors',prevBrokerage:'Oakridge',years:6,specialty:'Luxury',
+   icaSigned:'2026-04-29',w9OnFile:true,w9Date:'2026-04-30',plan:'Pro',billing:'Annual',payment:null,
+   social:{instagram:'rachel.luxurydenver',facebook:'rachel.brennan.realtor',linkedin:'rachel-brennan',twitter:'',tiktok:'',youtube:'',website:'rachelbrennan.co'},
+   status:'In Review',notes:'All docs in order. Waiting on final compliance review. Target close: 5/8.'},
+  {firstName:'Tomás',lastName:'Oliveira',business:'Oliveira Commercial Advisors',email:'tomas@lumen.re',phone:'+1 312-555-0156',
+   address:'875 N Michigan Ave',city:'Chicago',state:'IL',zip:'60611',
+   license:'IL-475.184932',licenseState:'IL',licenseExp:'2027-03-31',mls:'MRED',board:'Chicago Association of Realtors',prevBrokerage:'Lumen Real Estate',years:5,specialty:'Commercial',
+   icaSigned:'2026-05-02',w9OnFile:true,w9Date:'2026-05-02',plan:'Pro',billing:'Monthly',payment:null,
+   social:{instagram:'',facebook:'',linkedin:'tomas-oliveira-cre',twitter:'tomas_cre',tiktok:'',youtube:'',website:'tomasoliveira.com'},
+   status:'In Review',notes:''},
+  {firstName:'Liam',lastName:'Patel',business:'Patel NYC Luxury',email:'liam.p@sterling.co',phone:'+1 212-555-0148',
+   address:'432 Park Ave',city:'New York',state:'NY',zip:'10022',
+   license:'NY-10401203881',licenseState:'NY',licenseExp:'2027-12-15',mls:'REBNY',board:'Manhattan Association of Realtors',prevBrokerage:'Sterling Realty',years:9,specialty:'Luxury',
+   icaSigned:'2024-03-10',w9OnFile:true,w9Date:'2024-03-11',plan:'Pro',billing:'Annual',payment:'Visa ····4242',
+   social:{instagram:'liam.nycluxury',facebook:'liam.patel.nyc',linkedin:'liam-patel-nyc',twitter:'liampatel_nyc',tiktok:'liam.nyc',youtube:'liamPatelNYC',website:'liampatelnyc.com'},
+   status:'Approved',joined:'2024-03-12',deals:34,revenue:'$12.4M',top:true,notes:'Top performer. Closed $12.4M in first 14 months.'},
+  {firstName:'Camille',lastName:'Voss',business:'Voss + Co.',email:'c.voss@anchor.io',phone:'+1 619-555-0135',
+   address:'1230 Prospect St',city:'San Diego',state:'CA',zip:'92037',
+   license:'CA-02141998',licenseState:'CA',licenseExp:'2026-10-22',mls:'SDMLS',board:'Greater San Diego Association of Realtors',prevBrokerage:'Anchor Group',years:6,specialty:'Residential',
+   icaSigned:'2024-06-01',w9OnFile:true,w9Date:'2024-06-02',plan:'Pro',billing:'Monthly',payment:'Mastercard ····8810',
+   social:{instagram:'camille.lajolla',facebook:'',linkedin:'camille-voss',twitter:'',tiktok:'camille.sd',youtube:'',website:''},
+   status:'Approved',joined:'2024-06-04',deals:21,revenue:'$6.8M',top:false,notes:''},
+  {firstName:'Jordan',lastName:'Mehta',business:'',email:'j.mehta@vertex.us',phone:'+1 404-555-0190',
+   address:'3344 Peachtree Rd NE',city:'Atlanta',state:'GA',zip:'30326',
+   license:'GA-411203',licenseState:'GA',licenseExp:'2027-02-28',mls:'GAMLS',board:'Atlanta Realtors Association',prevBrokerage:'Vertex Realty',years:2,specialty:'Residential',
+   icaSigned:'2025-01-18',w9OnFile:true,w9Date:'2025-01-19',plan:'Basic',billing:'—',payment:'—',
+   social:{instagram:'jordan.atlanta',facebook:'',linkedin:'jordan-mehta',twitter:'',tiktok:'jordan.atl',youtube:'',website:''},
+   status:'Approved',joined:'2025-01-22',deals:9,revenue:'$2.1M',top:false,notes:''},
+  {firstName:'Elena',lastName:'Whitaker',business:'Whitaker CRE',email:'elena.w@summit.co',phone:'+1 503-555-0124',
+   address:'1211 SW 5th Ave',city:'Portland',state:'OR',zip:'97204',
+   license:'OR-201219234',licenseState:'OR',licenseExp:'2026-12-04',mls:'RMLS',board:'Portland Metropolitan Association of Realtors',prevBrokerage:'Summit Properties',years:5,specialty:'Commercial',
+   icaSigned:'2024-09-12',w9OnFile:true,w9Date:'2024-09-13',plan:'Pro',billing:'Annual',payment:'Visa ····1199',
+   social:{instagram:'elena.pdxcre',facebook:'elena.whitaker.cre',linkedin:'elena-whitaker',twitter:'elena_pdx',tiktok:'',youtube:'elenaWhitakerPDX',website:'elenawhitaker.com'},
+   status:'Approved',joined:'2024-09-15',deals:18,revenue:'$5.3M',top:true,notes:'Strong commercial performer in PDX market.'},
+  {firstName:'Marcus',lastName:'Bell',business:'',email:'m.bell@ridge.co',phone:'+1 469-555-0163',
+   address:'2200 Ross Ave',city:'Dallas',state:'TX',zip:'75201',
+   license:'TX-pending',licenseState:'TX',licenseExp:'',mls:'NTREIS',board:'MetroTex Association of Realtors',prevBrokerage:'Ridge Capital',years:1,specialty:'Residential',
+   icaSigned:null,w9OnFile:false,plan:'Basic',billing:'—',payment:null,
+   social:{instagram:'',facebook:'',linkedin:'',twitter:'',tiktok:'',youtube:'',website:''},
+   status:'Rejected',notes:'License application still pending. Rejected 4/15 — re-apply once licensed.'}
+];
+
+function deriveAgent(a, i){
+  return {
+    id:'a'+i,
+    name:`${a.firstName} ${a.lastName}`,
+    initials:(a.firstName[0]+a.lastName[0]).toUpperCase(),
+    color:PALETTE[i%PALETTE.length],
+    location:`${a.city}, ${a.state}`,
+    deals:a.deals||0,
+    revenue:a.revenue||'$0',
+    joined:a.joined||null,
+    top:a.top||false,
+    business:a.business||'',
+    notes:a.notes||'',
+    ...a
+  };
+}
+
+const state = {
+  agents: SEED.map(deriveAgent),
+  activeTab:'recruitment',
+  view:'kanban',
+  selectedId:null,
+  filters:{search:'',company:'',plan:''}
+};
+
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const statusKey = s => s.replace(/\s+/g,'');
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* Get/set nested keys via dot notation, e.g. "social.instagram" */
+function getField(obj, key){
+  return key.split('.').reduce((o,k)=>o==null?undefined:o[k], obj);
+}
+function setField(obj, key, val){
+  const parts = key.split('.');
+  let o = obj;
+  for(let i=0;i<parts.length-1;i++){
+    if(o[parts[i]]==null) o[parts[i]] = {};
+    o = o[parts[i]];
+  }
+  o[parts[parts.length-1]] = val;
+}
+
+function filtered(){
+  const {search,company,plan} = state.filters;
+  return state.agents.filter(a=>{
+    if(search && !(a.name.toLowerCase().includes(search.toLowerCase()) || a.email.toLowerCase().includes(search.toLowerCase()))) return false;
+    if(company && !a.prevBrokerage.toLowerCase().includes(company.toLowerCase())) return false;
+    if(plan && !a.plan.toLowerCase().includes(plan.toLowerCase())) return false;
+    return true;
   });
+}
+
+function showToast(msg){
+  const t = $('#toast');
+  t.innerHTML = `<span class="toast-icon">✓</span>${esc(msg)}`;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function moveAgent(id,newStatus){
+  const a = state.agents.find(x=>x.id===id);
+  if(!a) return;
+  const old = a.status;
+  if(old===newStatus) return;
+  a.status = newStatus;
+  if(newStatus==='Approved' && !a.joined){
+    a.joined = new Date().toISOString().slice(0,10);
+    a.deals = a.deals || 0;
+    a.revenue = a.revenue || '$0';
+  }
+  render();
+  showToast(`${a.name}: ${old} → ${newStatus}`);
+}
+
+function advanceAgent(id){
+  const a = state.agents.find(x=>x.id===id);
+  if(!a) return;
+  const idx = PIPELINE.indexOf(a.status);
+  if(idx>=0 && idx<PIPELINE.length-1) moveAgent(id,PIPELINE[idx+1]);
+}
+
+function renderStats(){
+  const ag = state.agents;
+  const counts = STATUSES.reduce((m,s)=>(m[s]=ag.filter(a=>a.status===s).length,m),{});
+  const total = ag.length;
+  const conv = total ? Math.round(counts['Approved']/total*100) : 0;
+  const items = state.activeTab==='recruitment'
+    ? [
+        ['Total',total,'var(--text)'],
+        ['Pending',counts['Pending'],'var(--s1)'],
+        ['Contacted',counts['Contacted'],'var(--s2)'],
+        ['In Review',counts['In Review'],'var(--s3)'],
+        ['Approved',counts['Approved'],'var(--s4)'],
+        ['Rejected',counts['Rejected'],'var(--s5)'],
+        ['Conversion',conv+'%','var(--text)']
+      ]
+    : (()=>{
+        const approved = ag.filter(a=>a.status==='Approved');
+        const top = approved.filter(a=>a.top).length;
+        const totalDeals = approved.reduce((s,a)=>s+(a.deals||0),0);
+        const pro = approved.filter(a=>a.plan==='Pro').length;
+        return [
+          ['Active Agents',approved.length,'var(--s4)'],
+          ['Top Performers',top,'#f59e0b'],
+          ['Pro Plan',pro,'#92400e'],
+          ['Total Deals',totalDeals,'var(--text)']
+        ];
+      })();
+  $('#statsStrip').innerHTML = items.map(([l,n,c])=>
+    `<div class="stat-item"><div class="stat-num" style="color:${c}">${n}</div><div class="stat-label">${l}</div></div>`
+  ).join('');
+}
+
+function cardHTML(a){
+  return `
+    <div class="agent-card ${state.selectedId===a.id?'selected':''}" data-id="${a.id}">
+      ${a.notes?'<div class="note-dot" title="Has notes"></div>':''}
+      <div class="card-top">
+        <div class="avatar" style="background:${a.color}">${a.initials}</div>
+        <div class="card-info">
+          <div class="card-name">${esc(a.name)}</div>
+          <div class="card-email">${esc(a.email)}</div>
+        </div>
+        <div class="status-pill s-${statusKey(a.status)}">${a.status}</div>
+      </div>
+      <div class="card-company">${esc(a.prevBrokerage)} · ${esc(a.location)}</div>
+      <div class="card-meta">
+        <span class="plan-badge plan-${a.plan}">${a.plan}</span>
+        <span class="meta-tag">${a.years}+ yrs</span>
+        <span class="meta-tag">${esc(a.specialty)}</span>
+      </div>
+    </div>`;
+}
+
+function renderKanban(){
+  const list = filtered();
+  $('#kanbanBoard').innerHTML = STATUSES.map(s=>{
+    const cards = list.filter(a=>a.status===s);
+    return `
+      <div class="kanban-col" style="border-top-color:${COL_COLORS[s]}">
+        <div class="col-header">
+          <div class="col-title" style="color:${COL_COLORS[s]}">${s}</div>
+          <div class="col-count">${cards.length}</div>
+        </div>
+        <div class="col-cards">
+          ${cards.length ? cards.map(cardHTML).join('') : '<div class="empty-col">No agents</div>'}
+        </div>
+      </div>`;
+  }).join('');
+  $$('#kanbanBoard .agent-card').forEach(c=>c.addEventListener('click',()=>openPanel(c.dataset.id)));
+}
+
+function renderList(){
+  const list = filtered();
+  $('#listView').innerHTML = `
+    <table class="list-table">
+      <thead><tr>
+        <th>Stage</th><th>Name</th><th>Brokerage</th><th>Plan</th><th>Status</th><th>Email</th>
+      </tr></thead>
+      <tbody>
+        ${list.map(a=>{
+          const idx = STATUSES.indexOf(a.status)+1;
+          return `<tr data-id="${a.id}" class="${state.selectedId===a.id?'sel':''}">
+            <td><span class="step-dot" style="background:${COL_COLORS[a.status]}">${idx}</span></td>
+            <td>${esc(a.name)}</td>
+            <td>${esc(a.prevBrokerage)}</td>
+            <td><span class="plan-badge plan-${a.plan}">${a.plan}</span></td>
+            <td><span class="status-pill s-${statusKey(a.status)}">${a.status}</span></td>
+            <td>${esc(a.email)}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+  $$('#listView tbody tr').forEach(tr=>tr.addEventListener('click',()=>openPanel(tr.dataset.id)));
+}
+
+function renderRoster(){
+  const roster = filtered().filter(a=>a.status==='Approved');
+  if(!roster.length){
+    $('#rosterView').innerHTML = `
+      <div class="roster-empty">
+        <div class="roster-empty-icon">👥</div>
+        <div class="roster-empty-title">No active agents yet</div>
+        <div class="roster-empty-text">Approve agents in the Recruitment tab and they'll appear here.</div>
+      </div>`;
+    return;
+  }
+  $('#rosterView').innerHTML = `
+    <div class="roster-grid">
+      ${roster.map(a=>`
+        <div class="roster-card ${state.selectedId===a.id?'selected':''}" data-id="${a.id}">
+          ${a.top?'<div class="top-perf">⭐ TOP PERFORMER</div>':''}
+          <div class="roster-top">
+            <div class="avatar roster-avatar" style="background:${a.color}">${a.initials}</div>
+            <div>
+              <div class="roster-name">${esc(a.name)}</div>
+              <div class="roster-company">${esc(a.prevBrokerage)} · ${esc(a.location)}</div>
+            </div>
+          </div>
+          <div class="roster-stats">
+            <div class="roster-stat">
+              <div class="roster-stat-num">${a.deals}</div>
+              <div class="roster-stat-label">Deals</div>
+            </div>
+            <div class="roster-stat">
+              <div class="roster-stat-num">${esc(a.revenue)}</div>
+              <div class="roster-stat-label">Revenue</div>
+            </div>
+            <div class="roster-stat">
+              <div class="roster-stat-num">${a.years}y</div>
+              <div class="roster-stat-label">Experience</div>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  $$('#rosterView .roster-card').forEach(c=>c.addEventListener('click',()=>openPanel(c.dataset.id)));
+}
+
+function openPanel(id){
+  state.selectedId = id;
+  document.body.classList.add('panel-open');
+  $('#sidePanel').setAttribute('aria-hidden','false');
+  renderPanel();
+  if(state.activeTab==='recruitment'){
+    state.view==='list'?renderList():renderKanban();
+  } else renderRoster();
+}
+
+function closePanel(){
+  state.selectedId = null;
+  document.body.classList.remove('panel-open');
+  $('#sidePanel').setAttribute('aria-hidden','true');
+  if(state.activeTab==='recruitment'){
+    state.view==='list'?renderList():renderKanban();
+  } else renderRoster();
+}
+
+/* ── Editable row helper. opts may contain: type, choices, agentId, key */
+function row(label, val, agentId, key, type='text', choices=null){
+  const empty = val==null || val==='' || val==='—';
+  const optsAttr = choices ? ` data-choices='${esc(JSON.stringify(choices))}'` : '';
+  return `<div class="panel-row">
+    <span class="panel-row-label">${esc(label)}</span>
+    <span class="panel-row-val editable ${empty?'empty':''}" data-id="${agentId}" data-key="${esc(key)}" data-type="${type}"${optsAttr}>${empty?'—':esc(val)}</span>
+  </div>`;
+}
+/* Static (non-editable) row, e.g. for status badges */
+function staticRow(label, valHTML){
+  return `<div class="panel-row">
+    <span class="panel-row-label">${esc(label)}</span>
+    <span class="panel-row-val">${valHTML}</span>
+  </div>`;
+}
+function sectionHTML(num, title, bodyHTML){
+  return `<div class="panel-section">
+    <div class="panel-section-header"><span>${esc(title)}</span>${num?`<span class="step-num">${num}</span>`:''}</div>
+    <div class="panel-section-body">${bodyHTML}</div>
+  </div>`;
+}
+
+const SOCIALS = [
+  {key:'instagram',label:'Instagram',cls:'ig',short:'IG',url:h=>`https://instagram.com/${h}`},
+  {key:'facebook', label:'Facebook', cls:'fb',short:'FB',url:h=>`https://facebook.com/${h}`},
+  {key:'linkedin', label:'LinkedIn', cls:'li',short:'IN',url:h=>`https://linkedin.com/in/${h}`},
+  {key:'twitter',  label:'X / Twitter',cls:'tw',short:'X',url:h=>`https://x.com/${h}`},
+  {key:'tiktok',   label:'TikTok',   cls:'tt',short:'TT',url:h=>`https://tiktok.com/@${h}`},
+  {key:'youtube',  label:'YouTube',  cls:'yt',short:'YT',url:h=>`https://youtube.com/@${h}`},
+  {key:'website',  label:'Website',  cls:'ws',short:'WW',url:h=>h.startsWith('http')?h:`https://${h}`}
+];
+
+function socialListHTML(agent){
+  const social = agent.social || {};
+  return `<div class="social-list">
+    ${SOCIALS.map(s=>{
+      const handle = social[s.key]||'';
+      const empty = !handle;
+      const display = empty ? 'Click to add' : (s.key==='website' ? handle : '@'+handle);
+      const linkBtn = !empty ? `<a class="social-link" href="${esc(s.url(handle))}" target="_blank" rel="noopener" title="Open ${s.label}">↗</a>` : '';
+      return `<div class="social-row">
+        <div class="social-icon ${s.cls}">${s.short}</div>
+        <div class="social-text">
+          <span class="platform">${s.label}</span>
+          <span class="social-handle ${empty?'empty':''}" data-id="${agent.id}" data-key="social.${s.key}" data-type="text">${esc(display)}</span>
+        </div>
+        ${linkBtn}
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+/* ── INLINE EDITING ───────────────────────────────────────────────── */
+function startEdit(span){
+  if(span.classList.contains('editing')) return;
+  const id = span.dataset.id;
+  const key = span.dataset.key;
+  const type = span.dataset.type || 'text';
+  const choices = span.dataset.choices ? JSON.parse(span.dataset.choices) : null;
+  const agent = state.agents.find(a=>a.id===id);
+  if(!agent) return;
+
+  const currentVal = getField(agent, key);
+  const displayVal = currentVal==null ? '' : String(currentVal);
+  const originalText = span.textContent;
+
+  let input;
+  if(choices){
+    input = document.createElement('select');
+    input.className = 'edit-select';
+    if(!choices.includes(displayVal) && displayVal!==''){
+      const o = document.createElement('option');
+      o.value = displayVal; o.textContent = displayVal;
+      input.appendChild(o);
+    }
+    choices.forEach(c=>{
+      const o = document.createElement('option');
+      o.value = c; o.textContent = c;
+      if(c===displayVal) o.selected = true;
+      input.appendChild(o);
+    });
+  } else {
+    input = document.createElement('input');
+    input.type = type;
+    input.className = 'edit-input';
+    input.value = displayVal;
+  }
+
+  span.classList.add('editing');
+  span.textContent = '';
+  span.appendChild(input);
+  input.focus();
+  if(input.select) try{input.select()}catch(e){}
+
+  let cancelled = false;
+  let done = false;
+  const finish = () => {
+    if(done) return; done = true;
+    if(cancelled){
+      span.textContent = originalText;
+      span.classList.remove('editing');
+      return;
+    }
+    const newVal = input.value.trim();
+    setField(agent, key, newVal);
+
+    // Recompute derived fields
+    if(key==='firstName' || key==='lastName'){
+      agent.name = `${agent.firstName} ${agent.lastName}`;
+      if(agent.firstName && agent.lastName){
+        agent.initials = (agent.firstName[0]+agent.lastName[0]).toUpperCase();
+      }
+    }
+    if(key==='city' || key==='state'){
+      agent.location = `${agent.city||''}${agent.city&&agent.state?', ':''}${agent.state||''}`;
+    }
+    // ICA / W9 toggling
+    if(key==='icaSigned') agent.icaSigned = newVal || null;
+    if(key==='w9Date'){
+      agent.w9Date = newVal || null;
+      agent.w9OnFile = !!newVal;
+    }
+    render();
+    showToast('Updated');
+  };
+
+  input.addEventListener('blur', finish);
+  input.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); input.blur(); }
+    else if(e.key==='Escape'){ cancelled = true; input.blur(); }
+  });
+}
+
+function setupEditing(){
+  $$('#panelBody .editable, #panelBody .social-handle').forEach(el=>{
+    el.addEventListener('click', e=>{
+      e.stopPropagation();
+      startEdit(el);
+    });
+  });
+  const notesArea = $('#notesArea');
+  if(notesArea){
+    notesArea.addEventListener('input', ()=>{
+      const a = state.agents.find(x=>x.id===notesArea.dataset.id);
+      if(a){
+        a.notes = notesArea.value;
+        const meta = $('#notesMeta');
+        if(meta) meta.textContent = `${a.notes.length} chars · saved`;
+      }
+    });
+    notesArea.addEventListener('blur', ()=>{
+      // Refresh card list so the note-dot indicator updates
+      if(state.activeTab==='recruitment'){
+        state.view==='list'?renderList():renderKanban();
+      }
+    });
+  }
+}
+
+function renderPanel(){
+  const a = state.agents.find(x=>x.id===state.selectedId);
+  if(!a) return;
+  $('#panelHeader').innerHTML = `
+    <div class="avatar panel-avatar" style="background:${a.color}">${a.initials}</div>
+    <div class="panel-name-block">
+      <div class="panel-name">${esc(a.name)}</div>
+      <div class="panel-email">${esc(a.email)}</div>
+    </div>
+    <button class="panel-close" id="panelClose" aria-label="Close">×</button>`;
+  $('#panelClose').addEventListener('click',closePanel);
+
+  const idx = PIPELINE.indexOf(a.status);
+  const isRejected = a.status==='Rejected';
+  const stepper = PIPELINE.map((s,i)=>{
+    if(isRejected) return '<div class="step rejected"></div>';
+    if(i<idx) return '<div class="step done"></div>';
+    if(i===idx) return '<div class="step current"></div>';
+    return '<div class="step"></div>';
+  }).join('');
+
+  // Section 1 — Account (firstName, lastName, business, email, phone)
+  const acct = row('First name', a.firstName, a.id, 'firstName')
+             + row('Last name',  a.lastName,  a.id, 'lastName')
+             + row('Business name', a.business, a.id, 'business')
+             + row('Email',      a.email,     a.id, 'email', 'email')
+             + row('Phone',      a.phone,     a.id, 'phone', 'tel');
+
+  // Section 2 — Basic Details
+  const basic = row('Address', a.address, a.id, 'address')
+              + row('City',    a.city,    a.id, 'city')
+              + row('State',   a.state,   a.id, 'state', 'select', US_STATES)
+              + row('ZIP',     a.zip,     a.id, 'zip');
+
+  // Section 3 — Agent Credentials
+  const creds = row('License #',     a.license,       a.id, 'license')
+              + row('License state', a.licenseState,  a.id, 'licenseState', 'select', US_STATES)
+              + row('License expires', a.licenseExp,  a.id, 'licenseExp', 'date')
+              + row('MLS',           a.mls,           a.id, 'mls')
+              + row('Board',         a.board,         a.id, 'board')
+              + row('Prior brokerage', a.prevBrokerage, a.id, 'prevBrokerage')
+              + row('Years of experience', a.years,   a.id, 'years', 'number')
+              + row('Specialty',     a.specialty,     a.id, 'specialty', 'select', SPECIALTIES);
+
+  // Section 4 — ICA
+  const icaStatusHTML = a.icaSigned
+    ? `<span class="check-on">✓ Signed</span>`
+    : `<span class="check-off">Pending</span>`;
+  const ica = staticRow('Agreement', icaStatusHTML)
+            + row('Date signed', a.icaSigned, a.id, 'icaSigned', 'date');
+
+  // Section 5 — W9
+  const w9StatusHTML = a.w9OnFile
+    ? `<span class="check-on">✓ On file</span>`
+    : `<span class="check-off">Not received</span>`;
+  const w9 = staticRow('W9', w9StatusHTML)
+           + row('Date received', a.w9Date, a.id, 'w9Date', 'date');
+
+  // Section 6 — Plan
+  const plan = row('Plan', a.plan, a.id, 'plan', 'select', PLANS)
+             + row('Billing cycle', a.billing, a.id, 'billing', 'select', BILLING);
+
+  // Section 7 — Payment
+  const payment = row('Payment method', a.payment, a.id, 'payment')
+                + staticRow('Status', a.status==='Approved'?'Active':'Awaiting approval');
+
+  // Performance (only if approved)
+  const perf = a.status==='Approved'
+    ? sectionHTML('','Performance',
+        row('Joined Voro',  a.joined,  a.id, 'joined', 'date')
+      + row('Deals closed', a.deals,   a.id, 'deals', 'number')
+      + row('Total revenue', a.revenue, a.id, 'revenue')
+      + (a.top
+          ? `<div class="panel-row"><span class="panel-row-label">Recognition</span><span class="panel-row-val" style="color:#f59e0b;font-weight:700">⭐ Top Performer</span></div>`
+          : ''))
+    : '';
+
+  // Notes section
+  const notes = sectionHTML('','Notes',
+    `<textarea class="notes-area" id="notesArea" data-id="${a.id}" placeholder="Add internal notes about this agent — call summaries, preferences, follow-ups…">${esc(a.notes||'')}</textarea>
+     <div class="notes-meta" id="notesMeta">${(a.notes||'').length} chars</div>`
+  );
+
+  $('#panelBody').innerHTML = `
+    <div class="edit-hint">Click any field to edit ✎</div>
+    <div class="panel-section">
+      <div class="panel-section-header"><span>Pipeline Status</span></div>
+      <div class="panel-section-body">
+        <div style="display:flex;align-items:center;gap:8px;padding-top:6px">
+          <span class="status-pill s-${statusKey(a.status)}" style="font-size:11px;padding:4px 10px">${a.status}</span>
+        </div>
+        <div class="stepper">${stepper}</div>
+        <div class="stepper-labels"><span>Pending</span><span>Contacted</span><span>Review</span><span>Approved</span></div>
+        <div style="height:8px"></div>
+      </div>
+    </div>
+    ${sectionHTML('1','Account',acct)}
+    ${sectionHTML('2','Basic Details',basic)}
+    ${sectionHTML('3','Agent Credentials',creds)}
+    ${sectionHTML('+','Social Media',socialListHTML(a))}
+    ${sectionHTML('4','ICA',ica)}
+    ${sectionHTML('5','W9',w9)}
+    ${sectionHTML('6','Plan Selection',plan)}
+    ${sectionHTML('7','Payment',payment)}
+    ${perf}
+    ${notes}`;
+
+  // Action buttons
+  const canAdvance = idx>=0 && idx<PIPELINE.length-1;
+  const nextLabel = canAdvance ? PIPELINE[idx+1] : null;
+  let actionsHTML = '';
+  if(a.status==='Rejected'){
+    actionsHTML = `<div class="action-row">
+      <button class="action-btn btn-reset" data-act="reset">↺ Restore to Pending</button>
+    </div>`;
+  } else if(a.status==='Approved'){
+    actionsHTML = `<div class="action-row">
+      <button class="action-btn btn-reset" data-act="back">← Back to Review</button>
+      <button class="action-btn btn-reject" data-act="reject">Revoke</button>
+    </div>`;
+  } else {
+    actionsHTML = `
+      ${canAdvance?`<div class="action-row">
+        <button class="action-btn btn-advance" data-act="advance">Move to ${nextLabel} →</button>
+      </div>`:''}
+      <div class="action-row">
+        <button class="action-btn btn-approve" data-act="approve">✓ Approve</button>
+        <button class="action-btn btn-reject" data-act="reject">✕ Reject</button>
+      </div>`;
+  }
+  $('#panelActions').innerHTML = actionsHTML;
+  $$('#panelActions [data-act]').forEach(b=>b.addEventListener('click',()=>{
+    const act = b.dataset.act;
+    if(act==='advance') advanceAgent(a.id);
+    else if(act==='approve') moveAgent(a.id,'Approved');
+    else if(act==='reject') moveAgent(a.id,'Rejected');
+    else if(act==='reset') moveAgent(a.id,'Pending');
+    else if(act==='back'){
+      const i = PIPELINE.indexOf(a.status);
+      if(i>0) moveAgent(a.id,PIPELINE[i-1]);
+    }
+  }));
+
+  // Wire up inline editing
+  setupEditing();
+}
+
+function render(){
+  $('#tabCountRec').textContent = state.agents.length;
+  $('#tabCountRos').textContent = state.agents.filter(a=>a.status==='Approved').length;
+  const f = filtered();
+  $('#resultCount').textContent = `${f.length} of ${state.agents.length} agents`;
+  renderStats();
+  if(state.activeTab==='recruitment'){renderKanban();renderList();}
+  else {renderRoster();}
+  if(state.selectedId) renderPanel();
+}
+
+$('#tabSwitcher').addEventListener('click',e=>{
+  const btn = e.target.closest('.tab-btn');
+  if(!btn) return;
+  $$('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.activeTab = btn.dataset.tab;
+  document.body.classList.toggle('roster-tab', state.activeTab==='roster');
+  render();
 });
 
-// Tab switcher
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  });
+$('#viewToggle').addEventListener('click',e=>{
+  const btn = e.target.closest('.view-btn');
+  if(!btn) return;
+  $$('.view-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.view = btn.dataset.view;
+  document.body.classList.toggle('list-mode', state.view==='list');
 });
 
-// Card selection
-document.querySelectorAll('.agent-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    document.querySelectorAll('.agent-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
-  });
+$('#searchInput').addEventListener('input',e=>{state.filters.search=e.target.value;render()});
+$('#companyInput').addEventListener('input',e=>{state.filters.company=e.target.value;render()});
+$('#planInput').addEventListener('input',e=>{state.filters.plan=e.target.value;render()});
+$('#clearBtn').addEventListener('click',()=>{
+  state.filters={search:'',company:'',plan:''};
+  $('#searchInput').value='';$('#companyInput').value='';$('#planInput').value='';
+  render();
+  showToast('Filters cleared');
 });
+
+$('#simulateBtn').addEventListener('click',()=>{
+  const movable = state.agents.filter(a=>PIPELINE.indexOf(a.status)>=0 && PIPELINE.indexOf(a.status)<PIPELINE.length-1);
+  if(!movable.length){showToast('No agents to advance');return}
+  const pick = movable[Math.floor(Math.random()*movable.length)];
+  const idx = PIPELINE.indexOf(pick.status);
+  const newStatus = PIPELINE[idx+1];
+  pick.status = newStatus;
+  if(newStatus==='Approved' && !pick.joined){
+    pick.joined = new Date().toISOString().slice(0,10);
+  }
+  render();
+  showToast(`Batch run: ${pick.name} advanced to ${newStatus}`);
+});
+
+$('#panelOverlay').addEventListener('click',closePanel);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape' && !document.activeElement?.matches('input,select,textarea')) closePanel();
+});
+
+render();
 </script>
-
 </body>
 </html>
