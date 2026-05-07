@@ -6,7 +6,7 @@
 <title>Voro – Agent Recruitment Board</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#0d1b2a;--bg:#f4f6fb;--white:#fff;--blue:#2563eb;--blue-lt:#dbeafe;
   --border:#e2e8f0;--text:#1e293b;--muted:#64748b;
@@ -66,7 +66,7 @@ body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;backgro
 .agent-card:hover{border-color:var(--blue);box-shadow:0 4px 12px rgba(37,99,235,.12);transform:translateY(-1px)}
 .agent-card.selected{border-color:var(--blue);background:#eff6ff}
 .card-top{display:flex;gap:9px;align-items:flex-start;margin-bottom:7px}
-.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0;font-size:13px}
+.avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0;font-size:13px}
 .card-info{flex:1;min-width:0}
 .card-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-email,.card-company{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -89,7 +89,7 @@ body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;backgro
 .updated-badge{position:absolute;top:-7px;right:-7px;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.3px;box-shadow:0 2px 6px rgba(245,158,11,.45)}
 
 /* ── LIST VIEW ── */
-.list-view{padding:18px;height:100%;overflow-y:auto}
+.list-view{padding:18px;height:100%;overflow-y:auto;display:none}
 .list-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .list-table th{background:var(--bg);padding:9px 13px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
 .list-table td{padding:9px 13px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle}
@@ -97,3 +97,357 @@ body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;backgro
 .list-table tbody tr:hover td{background:#f8faff;cursor:pointer}
 .list-table tbody tr.sel td{background:#eff6ff}
 .step-dot{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700}
+
+/* show list view when active */
+body.list-mode .kanban-board{display:none}
+body.list-mode .list-view{display:block}
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="logo">Voro<span>.</span></div>
+  <div class="tab-switcher">
+    <button class="tab-btn active">Recruitment</button>
+    <button class="tab-btn">Onboarding</button>
+    <button class="tab-btn">Active Agents</button>
+  </div>
+  <div class="view-toggle">
+    <button class="view-btn active" data-view="kanban" title="Kanban view">▦</button>
+    <button class="view-btn" data-view="list" title="List view">☰</button>
+  </div>
+</div>
+
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar">
+  <input class="filter-input" placeholder="Search name or email…">
+  <input class="filter-input" placeholder="Company">
+  <input class="filter-input" placeholder="Plan">
+  <span class="result-count">12 of 12 agents</span>
+  <div class="filter-actions">
+    <button class="btn-clear">Clear filters</button>
+    <button class="btn-simulate">⚡ Simulate batch</button>
+  </div>
+</div>
+
+<!-- ── STATS STRIP ── -->
+<div class="stats-strip">
+  <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Total</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:var(--s1)">3</div><div class="stat-label">Pending</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:var(--s2)">2</div><div class="stat-label">Contacted</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:var(--s3)">2</div><div class="stat-label">In Review</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:var(--s4)">2</div><div class="stat-label">Docs</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:var(--s6)">3</div><div class="stat-label">Approved</div></div>
+  <div class="stat-item"><div class="stat-num">68%</div><div class="stat-label">Conversion</div></div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="main-wrapper">
+  <div class="content-area">
+
+    <!-- KANBAN -->
+    <div class="kanban-board">
+
+      <div class="kanban-col" style="border-top-color:var(--s1)">
+        <div class="col-header">
+          <div class="col-title" style="color:var(--s1)">Pending Outreach</div>
+          <div class="col-count">3</div>
+        </div>
+        <div class="col-cards">
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s1)">MR</div>
+              <div class="card-info">
+                <div class="card-name">Maya Rodriguez</div>
+                <div class="card-email">maya.r@harbor.co</div>
+              </div>
+              <div class="status-pill s-Pending">Pending</div>
+            </div>
+            <div class="card-company">Harbor Realty · Miami, FL</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-ElitePro">Elite Pro</span>
+              <span class="meta-tag">5+ yrs</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s4)">JT</div>
+              <div class="card-info">
+                <div class="card-name">James Tanaka</div>
+                <div class="card-email">j.tanaka@pacific.io</div>
+              </div>
+              <div class="status-pill s-Pending">Pending</div>
+            </div>
+            <div class="card-company">Pacific Group · Seattle, WA</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-Growth">Growth</span>
+              <span class="meta-tag">Commercial</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s5)">AK</div>
+              <div class="card-info">
+                <div class="card-name">Aisha Khan</div>
+                <div class="card-email">aisha@bluepine.com</div>
+              </div>
+              <div class="status-pill s-Pending">Pending</div>
+            </div>
+            <div class="card-company">Blue Pine Holdings · Austin, TX</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-Starter">Starter</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="kanban-col" style="border-top-color:var(--s2)">
+        <div class="col-header">
+          <div class="col-title" style="color:var(--s2)">Contacted</div>
+          <div class="col-count">2</div>
+        </div>
+        <div class="col-cards">
+
+          <div class="agent-card selected">
+            <div class="updated-badge">UPDATED</div>
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s2)">DC</div>
+              <div class="card-info">
+                <div class="card-name">Diego Castillo</div>
+                <div class="card-email">d.castillo@nu.com</div>
+              </div>
+              <div class="status-pill s-Contacted">Contacted</div>
+            </div>
+            <div class="card-company">Nu Properties · Phoenix, AZ</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-ElitePro">Elite Pro</span>
+              <span class="meta-tag">Replied 2d ago</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s3)">SP</div>
+              <div class="card-info">
+                <div class="card-name">Sarah Park</div>
+                <div class="card-email">sarah.p@meridian.us</div>
+              </div>
+              <div class="status-pill s-Contacted">Contacted</div>
+            </div>
+            <div class="card-company">Meridian Realty · Boston, MA</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-Growth">Growth</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="kanban-col" style="border-top-color:var(--s3)">
+        <div class="col-header">
+          <div class="col-title" style="color:var(--s3)">In Review</div>
+          <div class="col-count">2</div>
+        </div>
+        <div class="col-cards">
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s3)">RB</div>
+              <div class="card-info">
+                <div class="card-name">Rachel Brennan</div>
+                <div class="card-email">r.brennan@oak.co</div>
+              </div>
+              <div class="status-pill s-Contacted">Reviewing</div>
+            </div>
+            <div class="card-company">Oakridge · Denver, CO</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-ElitePro">Elite Pro</span>
+              <span class="meta-tag">Luxury</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s6)">TO</div>
+              <div class="card-info">
+                <div class="card-name">Tomás Oliveira</div>
+                <div class="card-email">tomas@lumen.re</div>
+              </div>
+              <div class="status-pill s-Contacted">Reviewing</div>
+            </div>
+            <div class="card-company">Lumen Real Estate · Chicago, IL</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-Growth">Growth</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="kanban-col" style="border-top-color:var(--s4)">
+        <div class="col-header">
+          <div class="col-title" style="color:var(--s4)">Documents</div>
+          <div class="col-count">2</div>
+        </div>
+        <div class="col-cards">
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s4)">EW</div>
+              <div class="card-info">
+                <div class="card-name">Elena Whitaker</div>
+                <div class="card-email">elena.w@summit.co</div>
+              </div>
+              <div class="status-pill s-Contacted">Docs</div>
+            </div>
+            <div class="card-company">Summit Properties · Portland, OR</div>
+            <div class="card-docs">
+              <span class="doc-chip doc-done">✓ License</span>
+              <span class="doc-chip doc-done">✓ W-9</span>
+              <span class="doc-chip doc-pend">○ E&amp;O</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s5)">NF</div>
+              <div class="card-info">
+                <div class="card-name">Noah Fischer</div>
+                <div class="card-email">noah@crestview.us</div>
+              </div>
+              <div class="status-pill s-Contacted">Docs</div>
+            </div>
+            <div class="card-company">Crestview Group · Nashville, TN</div>
+            <div class="card-docs">
+              <span class="doc-chip doc-done">✓ License</span>
+              <span class="doc-chip doc-pend">○ W-9</span>
+              <span class="doc-chip doc-pend">○ E&amp;O</span>
+            </div>
+            <div class="ready-badge">READY FOR REVIEW</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="kanban-col" style="border-top-color:var(--s6)">
+        <div class="col-header">
+          <div class="col-title" style="color:var(--s6)">Approved</div>
+          <div class="col-count">3</div>
+        </div>
+        <div class="col-cards">
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s6)">LP</div>
+              <div class="card-info">
+                <div class="card-name">Liam Patel</div>
+                <div class="card-email">liam.p@sterling.co</div>
+              </div>
+              <div class="status-pill s-Approved">Approved</div>
+            </div>
+            <div class="card-company">Sterling Realty · NYC, NY</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-ElitePro">Elite Pro</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s2)">CV</div>
+              <div class="card-info">
+                <div class="card-name">Camille Voss</div>
+                <div class="card-email">c.voss@anchor.io</div>
+              </div>
+              <div class="status-pill s-Approved">Approved</div>
+            </div>
+            <div class="card-company">Anchor Group · San Diego, CA</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-Growth">Growth</span>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="card-top">
+              <div class="avatar" style="background:var(--s1)">JM</div>
+              <div class="card-info">
+                <div class="card-name">Jordan Mehta</div>
+                <div class="card-email">j.mehta@vertex.us</div>
+              </div>
+              <div class="status-pill s-Approved">Approved</div>
+            </div>
+            <div class="card-company">Vertex Realty · Atlanta, GA</div>
+            <div class="card-meta">
+              <span class="plan-badge plan-Starter">Starter</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="kanban-col" style="border-top-color:#ef4444">
+        <div class="col-header">
+          <div class="col-title" style="color:#ef4444">Rejected</div>
+          <div class="col-count">0</div>
+        </div>
+        <div class="col-cards">
+          <div class="empty-col">No rejected agents</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIST VIEW -->
+    <div class="list-view">
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Step</th><th>Name</th><th>Company</th><th>Plan</th><th>Status</th><th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="step-dot" style="background:var(--s1)">1</span></td><td>Maya Rodriguez</td><td>Harbor Realty</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Pending">Pending</span></td><td>maya.r@harbor.co</td></tr>
+          <tr class="sel"><td><span class="step-dot" style="background:var(--s2)">2</span></td><td>Diego Castillo</td><td>Nu Properties</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Contacted">Contacted</span></td><td>d.castillo@nu.com</td></tr>
+          <tr><td><span class="step-dot" style="background:var(--s3)">3</span></td><td>Rachel Brennan</td><td>Oakridge</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Contacted">Reviewing</span></td><td>r.brennan@oak.co</td></tr>
+          <tr><td><span class="step-dot" style="background:var(--s4)">4</span></td><td>Elena Whitaker</td><td>Summit Properties</td><td><span class="plan-badge plan-Growth">Growth</span></td><td><span class="status-pill s-Contacted">Docs</span></td><td>elena.w@summit.co</td></tr>
+          <tr><td><span class="step-dot" style="background:var(--s6)">5</span></td><td>Liam Patel</td><td>Sterling Realty</td><td><span class="plan-badge plan-ElitePro">Elite Pro</span></td><td><span class="status-pill s-Approved">Approved</span></td><td>liam.p@sterling.co</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// View toggle (kanban / list)
+document.querySelectorAll('.view-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.classList.toggle('list-mode', btn.dataset.view==='list');
+  });
+});
+
+// Tab switcher
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Card selection
+document.querySelectorAll('.agent-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    document.querySelectorAll('.agent-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+  });
+});
+</script>
+
+</body>
+</html>
