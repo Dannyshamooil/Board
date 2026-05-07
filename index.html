@@ -11,7 +11,7 @@
   --navy:#0d1b2a;--bg:#f4f6fb;--white:#fff;--blue:#2563eb;--blue-lt:#dbeafe;
   --border:#e2e8f0;--text:#1e293b;--muted:#64748b;
   --s1:#6366f1;--s2:#8b5cf6;--s3:#f59e0b;--s4:#22c55e;--s5:#ef4444;
-  --panel-w:460px;
+  --panel-w:480px;
 }
 html,body{height:100%;overflow:hidden}
 body{display:flex;flex-direction:column;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
@@ -178,6 +178,57 @@ body.panel-open .panel-overlay{opacity:1;pointer-events:auto}
 .social-link{color:var(--blue);text-decoration:none;font-size:13px;flex-shrink:0;padding:4px 6px;border-radius:6px;transition:background .15s}
 .social-link:hover{background:var(--blue-lt)}
 
+/* Subscriptions */
+.subs-group{padding:10px 0;border-bottom:1px dashed var(--border)}
+.subs-group:last-child{border-bottom:none}
+.subs-group-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.subs-group-title{font-size:12px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px}
+.subs-group-count{font-size:10px;color:var(--muted);background:var(--bg);padding:1px 7px;border-radius:10px;font-weight:600}
+.subs-add-btn{background:var(--blue-lt);color:var(--blue);border:none;border-radius:6px;padding:4px 10px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:3px}
+.subs-add-btn:hover{background:var(--blue);color:#fff}
+.subs-list{display:flex;flex-direction:column;gap:6px}
+.subs-item{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--bg);border-radius:8px;font-size:12px;border:1px solid transparent;transition:all .15s}
+.subs-item:hover{border-color:var(--border);background:#fff}
+.subs-item.is-cancelling{background:#fff7ed;border-color:#fed7aa}
+.subs-item-info{flex:1;min-width:0}
+.subs-item-name{font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.subs-item-meta{font-size:10px;color:var(--muted);margin-top:1px}
+.subs-pill{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0;white-space:nowrap}
+.sub-active{background:#dcfce7;color:#166534}
+.sub-pending{background:#fef3c7;color:#92400e}
+.sub-cancelling{background:#ffedd5;color:#9a3412}
+.sub-primary{background:var(--blue-lt);color:var(--blue)}
+.subs-action-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:3px 7px;font-size:10px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s;flex-shrink:0;white-space:nowrap}
+.subs-action-btn:hover{background:#fff;color:var(--text);border-color:var(--text)}
+.subs-action-btn.activate{color:#166534;border-color:#bbf7d0}
+.subs-action-btn.activate:hover{background:#dcfce7;color:#166534}
+.subs-action-btn.cancel{color:#991b1b;border-color:#fecaca}
+.subs-action-btn.cancel:hover{background:#fee2e2}
+.subs-empty{font-size:11px;color:var(--muted);font-style:italic;text-align:center;padding:8px}
+.subs-add-form{display:flex;gap:6px;margin-top:6px;padding:8px;background:var(--blue-lt);border-radius:8px}
+.subs-add-form input{flex:1;border:1px solid #bfdbfe;border-radius:6px;padding:5px 8px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none}
+.subs-add-form input:focus{border-color:var(--blue)}
+.subs-add-form button{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:5px 10px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer}
+.subs-add-form button.cancel-add{background:#fff;color:var(--muted);border:1px solid var(--border)}
+
+.subs-summary{display:flex;justify-content:space-between;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:10px;font-size:12px}
+.subs-summary-label{color:var(--muted)}
+.subs-summary-val{font-weight:700;color:var(--text)}
+
+/* Documents */
+.docs-list{display:flex;flex-direction:column;gap:6px;padding:6px 0}
+.doc-item{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--bg);border-radius:8px;border:1px solid transparent;transition:all .15s;cursor:pointer}
+.doc-item:hover{border-color:var(--border);background:#fff}
+.doc-icon{width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.doc-item.signed .doc-icon{background:#dcfce7;border-color:#bbf7d0}
+.doc-item.sent .doc-icon{background:#fef3c7;border-color:#fde68a}
+.doc-info{flex:1;min-width:0}
+.doc-name{font-weight:600;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-meta{font-size:10px;color:var(--muted);margin-top:1px}
+.doc-actions{display:flex;gap:4px;flex-shrink:0}
+.docs-empty{font-size:11px;color:var(--muted);font-style:italic;text-align:center;padding:14px}
+.doc-preview-note{font-size:10px;color:var(--muted);background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:6px 9px;margin-top:8px;font-style:italic}
+
 .stepper{display:flex;align-items:center;gap:4px;margin-top:8px}
 .step{flex:1;height:6px;background:var(--bg);border-radius:3px}
 .step.done{background:var(--s4)}
@@ -263,6 +314,12 @@ const SPECIALTIES = ['Residential','Commercial','Luxury','Investment','Land','Mu
 const PLANS = ['Basic','Pro'];
 const BILLING = ['Monthly','Annual','—'];
 
+/* Default monthly fees per add-on type (matches portal pricing — adjust to match real prices) */
+const ADDON_FEES = { state: 25, license: 35, board: 45, mls: 55 };
+
+let nextId = 1;
+const newId = (prefix='id') => `${prefix}_${Date.now().toString(36)}_${nextId++}`;
+
 const SEED = [
   {firstName:'Maya',lastName:'Rodriguez',business:'Maya Rodriguez Realty Group',email:'maya.r@harbor.co',phone:'+1 305-555-0142',
    address:'1820 Brickell Ave',city:'Miami',state:'FL',zip:'33129',
@@ -311,13 +368,32 @@ const SEED = [
    license:'NY-10401203881',licenseState:'NY',licenseExp:'2027-12-15',mls:'REBNY',board:'Manhattan Association of Realtors',prevBrokerage:'Sterling Realty',years:9,specialty:'Luxury',
    icaSigned:'2024-03-10',w9OnFile:true,w9Date:'2024-03-11',plan:'Pro',billing:'Annual',payment:'Visa ····4242',
    social:{instagram:'liam.nycluxury',facebook:'liam.patel.nyc',linkedin:'liam-patel-nyc',twitter:'liampatel_nyc',tiktok:'liam.nyc',youtube:'liamPatelNYC',website:'liampatelnyc.com'},
-   status:'Approved',joined:'2024-03-12',deals:34,revenue:'$12.4M',top:true,notes:'Top performer. Closed $12.4M in first 14 months.'},
+   status:'Approved',joined:'2024-03-12',deals:34,revenue:'$12.4M',top:true,notes:'Top performer. Closed $12.4M in first 14 months.',
+   addons:{
+     states:[{name:'Connecticut',status:'active',addedDate:'2025-08-01'}],
+     licenses:[{number:'CT-RES.0826554',state:'CT',exp:'2027-04-12',status:'active',addedDate:'2025-08-04'}],
+     boards:[{name:'Hudson Gateway Association of Realtors',status:'active',addedDate:'2025-09-15'}],
+     mlses:[{name:'OneKey MLS',status:'active',addedDate:'2025-09-15'}]
+   },
+   documents:[
+     {name:'Marketing Co-op Agreement',status:'signed',sentDate:'2025-06-01',signedDate:'2025-06-03'},
+     {name:'2026 Compliance Update',status:'sent',sentDate:'2026-04-15'}
+   ]},
   {firstName:'Camille',lastName:'Voss',business:'Voss + Co.',email:'c.voss@anchor.io',phone:'+1 619-555-0135',
    address:'1230 Prospect St',city:'San Diego',state:'CA',zip:'92037',
    license:'CA-02141998',licenseState:'CA',licenseExp:'2026-10-22',mls:'SDMLS',board:'Greater San Diego Association of Realtors',prevBrokerage:'Anchor Group',years:6,specialty:'Residential',
    icaSigned:'2024-06-01',w9OnFile:true,w9Date:'2024-06-02',plan:'Pro',billing:'Monthly',payment:'Mastercard ····8810',
    social:{instagram:'camille.lajolla',facebook:'',linkedin:'camille-voss',twitter:'',tiktok:'camille.sd',youtube:'',website:''},
-   status:'Approved',joined:'2024-06-04',deals:21,revenue:'$6.8M',top:false,notes:''},
+   status:'Approved',joined:'2024-06-04',deals:21,revenue:'$6.8M',top:false,notes:'',
+   addons:{
+     states:[],
+     licenses:[],
+     boards:[{name:'North San Diego County Association of Realtors',status:'pending',addedDate:'2026-04-30'}],
+     mlses:[]
+   },
+   documents:[
+     {name:'NDA – Listing referral partner',status:'signed',sentDate:'2025-02-10',signedDate:'2025-02-11'}
+   ]},
   {firstName:'Jordan',lastName:'Mehta',business:'',email:'j.mehta@vertex.us',phone:'+1 404-555-0190',
    address:'3344 Peachtree Rd NE',city:'Atlanta',state:'GA',zip:'30326',
    license:'GA-411203',licenseState:'GA',licenseExp:'2027-02-28',mls:'GAMLS',board:'Atlanta Realtors Association',prevBrokerage:'Vertex Realty',years:2,specialty:'Residential',
@@ -329,7 +405,16 @@ const SEED = [
    license:'OR-201219234',licenseState:'OR',licenseExp:'2026-12-04',mls:'RMLS',board:'Portland Metropolitan Association of Realtors',prevBrokerage:'Summit Properties',years:5,specialty:'Commercial',
    icaSigned:'2024-09-12',w9OnFile:true,w9Date:'2024-09-13',plan:'Pro',billing:'Annual',payment:'Visa ····1199',
    social:{instagram:'elena.pdxcre',facebook:'elena.whitaker.cre',linkedin:'elena-whitaker',twitter:'elena_pdx',tiktok:'',youtube:'elenaWhitakerPDX',website:'elenawhitaker.com'},
-   status:'Approved',joined:'2024-09-15',deals:18,revenue:'$5.3M',top:true,notes:'Strong commercial performer in PDX market.'},
+   status:'Approved',joined:'2024-09-15',deals:18,revenue:'$5.3M',top:true,notes:'Strong commercial performer in PDX market.',
+   addons:{
+     states:[{name:'Washington',status:'active',addedDate:'2024-11-10'}],
+     licenses:[{number:'WA-138472',state:'WA',exp:'2026-11-20',status:'active',addedDate:'2024-11-12'}],
+     boards:[{name:'Seattle King County Realtors',status:'cancelling',addedDate:'2024-12-01'}],
+     mlses:[{name:'NWMLS',status:'active',addedDate:'2024-12-05'}]
+   },
+   documents:[
+     {name:'Multi-state Practice Disclosure',status:'signed',sentDate:'2024-11-05',signedDate:'2024-11-06'}
+   ]},
   {firstName:'Marcus',lastName:'Bell',business:'',email:'m.bell@ridge.co',phone:'+1 469-555-0163',
    address:'2200 Ross Ave',city:'Dallas',state:'TX',zip:'75201',
    license:'TX-pending',licenseState:'TX',licenseExp:'',mls:'NTREIS',board:'MetroTex Association of Realtors',prevBrokerage:'Ridge Capital',years:1,specialty:'Residential',
@@ -351,6 +436,8 @@ function deriveAgent(a, i){
     top:a.top||false,
     business:a.business||'',
     notes:a.notes||'',
+    addons:a.addons || {states:[],licenses:[],boards:[],mlses:[]},
+    documents:a.documents || [],
     ...a
   };
 }
@@ -360,7 +447,8 @@ const state = {
   activeTab:'recruitment',
   view:'kanban',
   selectedId:null,
-  filters:{search:'',company:'',plan:''}
+  filters:{search:'',company:'',plan:''},
+  addingTo:null  // {agentId, type} when add-on form is open
 };
 
 const $ = s => document.querySelector(s);
@@ -368,7 +456,6 @@ const $$ = s => document.querySelectorAll(s);
 const statusKey = s => s.replace(/\s+/g,'');
 const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/* Get/set nested keys via dot notation, e.g. "social.instagram" */
 function getField(obj, key){
   return key.split('.').reduce((o,k)=>o==null?undefined:o[k], obj);
 }
@@ -442,10 +529,15 @@ function renderStats(){
         const top = approved.filter(a=>a.top).length;
         const totalDeals = approved.reduce((s,a)=>s+(a.deals||0),0);
         const pro = approved.filter(a=>a.plan==='Pro').length;
+        const totalAddOns = approved.reduce((s,a)=>{
+          const ad=a.addons||{};
+          return s + (ad.states||[]).length + (ad.licenses||[]).length + (ad.boards||[]).length + (ad.mlses||[]).length;
+        },0);
         return [
           ['Active Agents',approved.length,'var(--s4)'],
           ['Top Performers',top,'#f59e0b'],
           ['Pro Plan',pro,'#92400e'],
+          ['Add-Ons Active',totalAddOns,'var(--blue)'],
           ['Total Deals',totalDeals,'var(--text)']
         ];
       })();
@@ -455,6 +547,8 @@ function renderStats(){
 }
 
 function cardHTML(a){
+  const ad = a.addons || {};
+  const addonCount = (ad.states||[]).length + (ad.licenses||[]).length + (ad.boards||[]).length + (ad.mlses||[]).length;
   return `
     <div class="agent-card ${state.selectedId===a.id?'selected':''}" data-id="${a.id}">
       ${a.notes?'<div class="note-dot" title="Has notes"></div>':''}
@@ -471,6 +565,7 @@ function cardHTML(a){
         <span class="plan-badge plan-${a.plan}">${a.plan}</span>
         <span class="meta-tag">${a.years}+ yrs</span>
         <span class="meta-tag">${esc(a.specialty)}</span>
+        ${addonCount?`<span class="meta-tag" style="background:#eff6ff;color:var(--blue);border-color:#bfdbfe">+${addonCount} add-ons</span>`:''}
       </div>
     </div>`;
 }
@@ -561,6 +656,7 @@ function renderRoster(){
 
 function openPanel(id){
   state.selectedId = id;
+  state.addingTo = null;
   document.body.classList.add('panel-open');
   $('#sidePanel').setAttribute('aria-hidden','false');
   renderPanel();
@@ -571,6 +667,7 @@ function openPanel(id){
 
 function closePanel(){
   state.selectedId = null;
+  state.addingTo = null;
   document.body.classList.remove('panel-open');
   $('#sidePanel').setAttribute('aria-hidden','true');
   if(state.activeTab==='recruitment'){
@@ -578,7 +675,6 @@ function closePanel(){
   } else renderRoster();
 }
 
-/* ── Editable row helper. opts may contain: type, choices, agentId, key */
 function row(label, val, agentId, key, type='text', choices=null){
   const empty = val==null || val==='' || val==='—';
   const optsAttr = choices ? ` data-choices='${esc(JSON.stringify(choices))}'` : '';
@@ -587,7 +683,6 @@ function row(label, val, agentId, key, type='text', choices=null){
     <span class="panel-row-val editable ${empty?'empty':''}" data-id="${agentId}" data-key="${esc(key)}" data-type="${type}"${optsAttr}>${empty?'—':esc(val)}</span>
   </div>`;
 }
-/* Static (non-editable) row, e.g. for status badges */
 function staticRow(label, valHTML){
   return `<div class="panel-row">
     <span class="panel-row-label">${esc(label)}</span>
@@ -631,6 +726,232 @@ function socialListHTML(agent){
   </div>`;
 }
 
+/* ── SUBSCRIPTIONS / ADD-ONS ──────────────────────────────────────── */
+const ADDON_TYPES = [
+  {key:'states',  type:'state',   label:'Additional States',     placeholder:'e.g. Connecticut'},
+  {key:'licenses',type:'license', label:'Additional Licenses',   placeholder:'e.g. CT-RES.0826554'},
+  {key:'boards',  type:'board',   label:'Additional Boards',     placeholder:'e.g. Hudson Gateway Assn'},
+  {key:'mlses',   type:'mls',     label:'Additional MLSes',      placeholder:'e.g. OneKey MLS'}
+];
+
+function subsItemHTML(agent, listKey, item, idx){
+  const cancelling = item.status==='cancelling';
+  const pending = item.status==='pending';
+  const pillCls = cancelling ? 'sub-cancelling' : (pending ? 'sub-pending' : 'sub-active');
+  const pillTxt = cancelling ? 'Cancelling' : (pending ? 'Pending billing' : 'Active');
+  const fee = item.fee || `$${ADDON_FEES[listKey.replace(/es?$/,'')]||25}/mo`;
+  const displayName = item.number ? `${item.number} (${item.state})` : item.name;
+  const meta = [
+    `Added ${item.addedDate}`,
+    fee
+  ].filter(Boolean).join(' · ');
+  let actions = '';
+  if(pending){
+    actions = `<button class="subs-action-btn activate" data-act="activate" data-list="${listKey}" data-idx="${idx}">▶ Activate</button>
+               <button class="subs-action-btn cancel" data-act="remove" data-list="${listKey}" data-idx="${idx}">✕</button>`;
+  } else if(cancelling){
+    actions = `<button class="subs-action-btn cancel" data-act="confirmCancel" data-list="${listKey}" data-idx="${idx}">Confirm cancel</button>`;
+  } else {
+    actions = `<button class="subs-action-btn cancel" data-act="requestCancel" data-list="${listKey}" data-idx="${idx}">✕ Cancel</button>`;
+  }
+  return `
+    <div class="subs-item ${cancelling?'is-cancelling':''}">
+      <div class="subs-item-info">
+        <div class="subs-item-name">${esc(displayName)}</div>
+        <div class="subs-item-meta">${esc(meta)}</div>
+      </div>
+      <span class="subs-pill ${pillCls}">${pillTxt}</span>
+      <div style="display:flex;gap:4px">${actions}</div>
+    </div>`;
+}
+
+function subsGroupHTML(agent, group){
+  const list = (agent.addons && agent.addons[group.key]) || [];
+  const isAdding = state.addingTo && state.addingTo.agentId===agent.id && state.addingTo.list===group.key;
+  const itemsHTML = list.length
+    ? list.map((it,i)=>subsItemHTML(agent, group.key, it, i)).join('')
+    : '<div class="subs-empty">No add-ons</div>';
+  const addForm = isAdding
+    ? `<div class="subs-add-form">
+         <input type="text" id="addonInput" placeholder="${esc(group.placeholder)}" autofocus>
+         <button data-act="confirmAdd" data-list="${group.key}">Add</button>
+         <button class="cancel-add" data-act="cancelAdd">×</button>
+       </div>`
+    : '';
+  return `
+    <div class="subs-group">
+      <div class="subs-group-header">
+        <div class="subs-group-title">${esc(group.label)} <span class="subs-group-count">${list.length}</span></div>
+        ${!isAdding?`<button class="subs-add-btn" data-act="startAdd" data-list="${group.key}">+ Add</button>`:''}
+      </div>
+      <div class="subs-list">${itemsHTML}</div>
+      ${addForm}
+    </div>`;
+}
+
+function subscriptionsSectionHTML(agent){
+  const ad = agent.addons || {};
+  const allItems = [...(ad.states||[]), ...(ad.licenses||[]), ...(ad.boards||[]), ...(ad.mlses||[])];
+  const activeItems = allItems.filter(i=>i.status==='active' || !i.status);
+  const monthlyTotal = activeItems.reduce((sum,it)=>{
+    const m = (it.fee||'').match(/\$(\d+(?:\.\d+)?)/);
+    return sum + (m ? parseFloat(m[1]) : (ADDON_FEES[Object.entries(ad).find(([k,v])=>v.includes(it))?.[0]?.replace(/es?$/,'')] || 25));
+  }, 0);
+  // Estimate fees for items missing fee field
+  let monthly = 0;
+  ['states','licenses','boards','mlses'].forEach(k=>{
+    (ad[k]||[]).filter(i=>i.status==='active'||!i.status).forEach(i=>{
+      const m = (i.fee||'').match(/\$(\d+(?:\.\d+)?)/);
+      monthly += m ? parseFloat(m[1]) : (ADDON_FEES[k.replace(/es?$/,'')]||25);
+    });
+  });
+  const summary = `<div class="subs-summary">
+    <span class="subs-summary-label">Active add-ons</span>
+    <span class="subs-summary-val">${activeItems.length} · ~$${monthly.toFixed(0)}/mo</span>
+  </div>`;
+  return summary + ADDON_TYPES.map(g=>subsGroupHTML(agent, g)).join('');
+}
+
+/* Subscription action handlers */
+function handleSubsAction(act, agentId, list, idx){
+  const a = state.agents.find(x=>x.id===agentId);
+  if(!a) return;
+  if(!a.addons) a.addons = {states:[],licenses:[],boards:[],mlses:[]};
+  if(!a.addons[list]) a.addons[list] = [];
+  const arr = a.addons[list];
+
+  if(act==='startAdd'){
+    state.addingTo = {agentId, list};
+    renderPanel();
+    setTimeout(()=>{ const inp = $('#addonInput'); if(inp) inp.focus(); },10);
+    return;
+  }
+  if(act==='cancelAdd'){
+    state.addingTo = null;
+    renderPanel();
+    return;
+  }
+  if(act==='confirmAdd'){
+    const inp = $('#addonInput');
+    const val = inp ? inp.value.trim() : '';
+    if(!val){ if(inp) inp.focus(); return; }
+    const today = new Date().toISOString().slice(0,10);
+    const fee = `$${ADDON_FEES[list.replace(/es?$/,'')]||25}/mo`;
+    let newItem;
+    if(list==='licenses'){
+      // Try to parse "STATE-NUMBER" pattern
+      const m = val.match(/^([A-Z]{2})[-\s]/i);
+      newItem = {number:val, state:m?m[1].toUpperCase():'—', exp:'', status:'pending', addedDate:today, fee};
+    } else if(list==='states'){
+      newItem = {name:val, status:'pending', addedDate:today, fee};
+    } else {
+      newItem = {name:val, status:'pending', addedDate:today, fee};
+    }
+    arr.push(newItem);
+    state.addingTo = null;
+    render();
+    showToast(`${val} added — pending billing`);
+    return;
+  }
+  if(act==='activate'){
+    if(arr[idx]) arr[idx].status='active';
+    render();
+    showToast('Activated · billing complete');
+    return;
+  }
+  if(act==='requestCancel'){
+    if(arr[idx]) arr[idx].status='cancelling';
+    render();
+    showToast('Cancellation requested');
+    return;
+  }
+  if(act==='confirmCancel' || act==='remove'){
+    arr.splice(idx,1);
+    render();
+    showToast('Removed from subscriptions');
+    return;
+  }
+}
+
+/* ── DOCUMENTS ─────────────────────────────────────────────────────── */
+function documentsSectionHTML(agent){
+  const docs = agent.documents || [];
+  const items = docs.length
+    ? docs.map((d,i)=>{
+        const cls = d.status; // signed | sent | viewed
+        const icon = d.status==='signed' ? '✓' : (d.status==='viewed' ? '👁' : '⏱');
+        const meta = d.status==='signed'
+          ? `Sent ${d.sentDate} · Signed ${d.signedDate}`
+          : d.status==='viewed'
+            ? `Sent ${d.sentDate} · Viewed, awaiting signature`
+            : `Sent ${d.sentDate} · Awaiting signature`;
+        const action = d.status==='signed'
+          ? `<button class="subs-action-btn" data-act="downloadDoc" data-idx="${i}">↓ Download</button>`
+          : `<button class="subs-action-btn activate" data-act="markSigned" data-idx="${i}">✓ Mark signed</button>`;
+        return `<div class="doc-item ${cls}">
+          <div class="doc-icon">${icon}</div>
+          <div class="doc-info">
+            <div class="doc-name">${esc(d.name)}</div>
+            <div class="doc-meta">${esc(meta)}</div>
+          </div>
+          <div class="doc-actions">${action}</div>
+        </div>`;
+      }).join('')
+    : '<div class="docs-empty">No documents sent yet</div>';
+  const isAddingDoc = state.addingTo && state.addingTo.agentId===agent.id && state.addingTo.list==='documents';
+  const sendForm = isAddingDoc
+    ? `<div class="subs-add-form">
+         <input type="text" id="docInput" placeholder="Document name (e.g. NDA, Compliance Update)" autofocus>
+         <button data-act="confirmSendDoc">Send</button>
+         <button class="cancel-add" data-act="cancelSendDoc">×</button>
+       </div>`
+    : `<button class="subs-add-btn" data-act="startSendDoc" style="margin-top:8px">+ Send for signature</button>`;
+  return `<div class="docs-list">${items}</div>
+          ${sendForm}
+          <div class="doc-preview-note">Preview · DigiSign integration coming soon. Buttons currently simulate the signing flow.</div>`;
+}
+
+function handleDocAction(act, agentId, idx){
+  const a = state.agents.find(x=>x.id===agentId);
+  if(!a) return;
+  if(!a.documents) a.documents = [];
+
+  if(act==='startSendDoc'){
+    state.addingTo = {agentId, list:'documents'};
+    renderPanel();
+    setTimeout(()=>{ const inp=$('#docInput'); if(inp) inp.focus(); },10);
+    return;
+  }
+  if(act==='cancelSendDoc'){
+    state.addingTo = null;
+    renderPanel();
+    return;
+  }
+  if(act==='confirmSendDoc'){
+    const inp = $('#docInput');
+    const val = inp ? inp.value.trim() : '';
+    if(!val){ if(inp) inp.focus(); return; }
+    a.documents.push({name:val, status:'sent', sentDate:new Date().toISOString().slice(0,10)});
+    state.addingTo = null;
+    renderPanel();
+    showToast(`Sent "${val}" for signature`);
+    return;
+  }
+  if(act==='markSigned'){
+    if(a.documents[idx]){
+      a.documents[idx].status = 'signed';
+      a.documents[idx].signedDate = new Date().toISOString().slice(0,10);
+    }
+    renderPanel();
+    showToast('Marked as signed');
+    return;
+  }
+  if(act==='downloadDoc'){
+    showToast('Download (mock) — would fetch signed PDF here');
+    return;
+  }
+}
+
 /* ── INLINE EDITING ───────────────────────────────────────────────── */
 function startEdit(span){
   if(span.classList.contains('editing')) return;
@@ -640,24 +961,19 @@ function startEdit(span){
   const choices = span.dataset.choices ? JSON.parse(span.dataset.choices) : null;
   const agent = state.agents.find(a=>a.id===id);
   if(!agent) return;
-
   const currentVal = getField(agent, key);
   const displayVal = currentVal==null ? '' : String(currentVal);
   const originalText = span.textContent;
-
   let input;
   if(choices){
     input = document.createElement('select');
     input.className = 'edit-select';
     if(!choices.includes(displayVal) && displayVal!==''){
-      const o = document.createElement('option');
-      o.value = displayVal; o.textContent = displayVal;
-      input.appendChild(o);
+      const o=document.createElement('option');o.value=displayVal;o.textContent=displayVal;input.appendChild(o);
     }
     choices.forEach(c=>{
-      const o = document.createElement('option');
-      o.value = c; o.textContent = c;
-      if(c===displayVal) o.selected = true;
+      const o=document.createElement('option');o.value=c;o.textContent=c;
+      if(c===displayVal) o.selected=true;
       input.appendChild(o);
     });
   } else {
@@ -666,58 +982,37 @@ function startEdit(span){
     input.className = 'edit-input';
     input.value = displayVal;
   }
-
   span.classList.add('editing');
   span.textContent = '';
   span.appendChild(input);
   input.focus();
   if(input.select) try{input.select()}catch(e){}
-
-  let cancelled = false;
-  let done = false;
+  let cancelled=false, done=false;
   const finish = () => {
-    if(done) return; done = true;
-    if(cancelled){
-      span.textContent = originalText;
-      span.classList.remove('editing');
-      return;
-    }
+    if(done) return; done=true;
+    if(cancelled){ span.textContent=originalText; span.classList.remove('editing'); return; }
     const newVal = input.value.trim();
     setField(agent, key, newVal);
-
-    // Recompute derived fields
-    if(key==='firstName' || key==='lastName'){
+    if(key==='firstName'||key==='lastName'){
       agent.name = `${agent.firstName} ${agent.lastName}`;
-      if(agent.firstName && agent.lastName){
-        agent.initials = (agent.firstName[0]+agent.lastName[0]).toUpperCase();
-      }
+      if(agent.firstName && agent.lastName) agent.initials = (agent.firstName[0]+agent.lastName[0]).toUpperCase();
     }
-    if(key==='city' || key==='state'){
-      agent.location = `${agent.city||''}${agent.city&&agent.state?', ':''}${agent.state||''}`;
-    }
-    // ICA / W9 toggling
+    if(key==='city'||key==='state') agent.location = `${agent.city||''}${agent.city&&agent.state?', ':''}${agent.state||''}`;
     if(key==='icaSigned') agent.icaSigned = newVal || null;
-    if(key==='w9Date'){
-      agent.w9Date = newVal || null;
-      agent.w9OnFile = !!newVal;
-    }
+    if(key==='w9Date'){ agent.w9Date = newVal || null; agent.w9OnFile = !!newVal; }
     render();
     showToast('Updated');
   };
-
   input.addEventListener('blur', finish);
   input.addEventListener('keydown', e=>{
     if(e.key==='Enter'){ e.preventDefault(); input.blur(); }
-    else if(e.key==='Escape'){ cancelled = true; input.blur(); }
+    else if(e.key==='Escape'){ cancelled=true; input.blur(); }
   });
 }
 
 function setupEditing(){
   $$('#panelBody .editable, #panelBody .social-handle').forEach(el=>{
-    el.addEventListener('click', e=>{
-      e.stopPropagation();
-      startEdit(el);
-    });
+    el.addEventListener('click', e=>{ e.stopPropagation(); startEdit(el); });
   });
   const notesArea = $('#notesArea');
   if(notesArea){
@@ -730,10 +1025,39 @@ function setupEditing(){
       }
     });
     notesArea.addEventListener('blur', ()=>{
-      // Refresh card list so the note-dot indicator updates
-      if(state.activeTab==='recruitment'){
-        state.view==='list'?renderList():renderKanban();
+      if(state.activeTab==='recruitment') state.view==='list'?renderList():renderKanban();
+    });
+  }
+  // Subscription action buttons
+  $$('#panelBody [data-act]').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const act = btn.dataset.act;
+      const agentId = state.selectedId;
+      // Document actions
+      if(act.startsWith('startSendDoc')||act==='confirmSendDoc'||act==='cancelSendDoc'||act==='markSigned'||act==='downloadDoc'){
+        handleDocAction(act, agentId, parseInt(btn.dataset.idx||'0',10));
+        return;
       }
+      // Subscription actions
+      const list = btn.dataset.list;
+      const idx = parseInt(btn.dataset.idx||'0',10);
+      handleSubsAction(act, agentId, list, idx);
+    });
+  });
+  // Enter key in add-on inputs
+  const addonInput = $('#addonInput');
+  if(addonInput){
+    addonInput.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ e.preventDefault(); handleSubsAction('confirmAdd', state.selectedId, state.addingTo?.list); }
+      else if(e.key==='Escape'){ handleSubsAction('cancelAdd'); }
+    });
+  }
+  const docInput = $('#docInput');
+  if(docInput){
+    docInput.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ e.preventDefault(); handleDocAction('confirmSendDoc', state.selectedId); }
+      else if(e.key==='Escape'){ handleDocAction('cancelSendDoc', state.selectedId); }
     });
   }
 }
@@ -759,20 +1083,17 @@ function renderPanel(){
     return '<div class="step"></div>';
   }).join('');
 
-  // Section 1 — Account (firstName, lastName, business, email, phone)
   const acct = row('First name', a.firstName, a.id, 'firstName')
              + row('Last name',  a.lastName,  a.id, 'lastName')
              + row('Business name', a.business, a.id, 'business')
              + row('Email',      a.email,     a.id, 'email', 'email')
              + row('Phone',      a.phone,     a.id, 'phone', 'tel');
 
-  // Section 2 — Basic Details
   const basic = row('Address', a.address, a.id, 'address')
               + row('City',    a.city,    a.id, 'city')
               + row('State',   a.state,   a.id, 'state', 'select', US_STATES)
               + row('ZIP',     a.zip,     a.id, 'zip');
 
-  // Section 3 — Agent Credentials
   const creds = row('License #',     a.license,       a.id, 'license')
               + row('License state', a.licenseState,  a.id, 'licenseState', 'select', US_STATES)
               + row('License expires', a.licenseExp,  a.id, 'licenseExp', 'date')
@@ -782,29 +1103,18 @@ function renderPanel(){
               + row('Years of experience', a.years,   a.id, 'years', 'number')
               + row('Specialty',     a.specialty,     a.id, 'specialty', 'select', SPECIALTIES);
 
-  // Section 4 — ICA
-  const icaStatusHTML = a.icaSigned
-    ? `<span class="check-on">✓ Signed</span>`
-    : `<span class="check-off">Pending</span>`;
-  const ica = staticRow('Agreement', icaStatusHTML)
-            + row('Date signed', a.icaSigned, a.id, 'icaSigned', 'date');
+  const icaStatusHTML = a.icaSigned ? `<span class="check-on">✓ Signed</span>` : `<span class="check-off">Pending</span>`;
+  const ica = staticRow('Agreement', icaStatusHTML) + row('Date signed', a.icaSigned, a.id, 'icaSigned', 'date');
 
-  // Section 5 — W9
-  const w9StatusHTML = a.w9OnFile
-    ? `<span class="check-on">✓ On file</span>`
-    : `<span class="check-off">Not received</span>`;
-  const w9 = staticRow('W9', w9StatusHTML)
-           + row('Date received', a.w9Date, a.id, 'w9Date', 'date');
+  const w9StatusHTML = a.w9OnFile ? `<span class="check-on">✓ On file</span>` : `<span class="check-off">Not received</span>`;
+  const w9 = staticRow('W9', w9StatusHTML) + row('Date received', a.w9Date, a.id, 'w9Date', 'date');
 
-  // Section 6 — Plan
   const plan = row('Plan', a.plan, a.id, 'plan', 'select', PLANS)
              + row('Billing cycle', a.billing, a.id, 'billing', 'select', BILLING);
 
-  // Section 7 — Payment
   const payment = row('Payment method', a.payment, a.id, 'payment')
                 + staticRow('Status', a.status==='Approved'?'Active':'Awaiting approval');
 
-  // Performance (only if approved)
   const perf = a.status==='Approved'
     ? sectionHTML('','Performance',
         row('Joined Voro',  a.joined,  a.id, 'joined', 'date')
@@ -815,7 +1125,8 @@ function renderPanel(){
           : ''))
     : '';
 
-  // Notes section
+  const subs = sectionHTML('+','Subscriptions & Add-Ons', subscriptionsSectionHTML(a));
+  const docs = sectionHTML('+','Documents', documentsSectionHTML(a));
   const notes = sectionHTML('','Notes',
     `<textarea class="notes-area" id="notesArea" data-id="${a.id}" placeholder="Add internal notes about this agent — call summaries, preferences, follow-ups…">${esc(a.notes||'')}</textarea>
      <div class="notes-meta" id="notesMeta">${(a.notes||'').length} chars</div>`
@@ -842,17 +1153,16 @@ function renderPanel(){
     ${sectionHTML('5','W9',w9)}
     ${sectionHTML('6','Plan Selection',plan)}
     ${sectionHTML('7','Payment',payment)}
+    ${subs}
+    ${docs}
     ${perf}
     ${notes}`;
 
-  // Action buttons
   const canAdvance = idx>=0 && idx<PIPELINE.length-1;
   const nextLabel = canAdvance ? PIPELINE[idx+1] : null;
   let actionsHTML = '';
   if(a.status==='Rejected'){
-    actionsHTML = `<div class="action-row">
-      <button class="action-btn btn-reset" data-act="reset">↺ Restore to Pending</button>
-    </div>`;
+    actionsHTML = `<div class="action-row"><button class="action-btn btn-reset" data-act="reset">↺ Restore to Pending</button></div>`;
   } else if(a.status==='Approved'){
     actionsHTML = `<div class="action-row">
       <button class="action-btn btn-reset" data-act="back">← Back to Review</button>
@@ -860,9 +1170,7 @@ function renderPanel(){
     </div>`;
   } else {
     actionsHTML = `
-      ${canAdvance?`<div class="action-row">
-        <button class="action-btn btn-advance" data-act="advance">Move to ${nextLabel} →</button>
-      </div>`:''}
+      ${canAdvance?`<div class="action-row"><button class="action-btn btn-advance" data-act="advance">Move to ${nextLabel} →</button></div>`:''}
       <div class="action-row">
         <button class="action-btn btn-approve" data-act="approve">✓ Approve</button>
         <button class="action-btn btn-reject" data-act="reject">✕ Reject</button>
@@ -875,13 +1183,9 @@ function renderPanel(){
     else if(act==='approve') moveAgent(a.id,'Approved');
     else if(act==='reject') moveAgent(a.id,'Rejected');
     else if(act==='reset') moveAgent(a.id,'Pending');
-    else if(act==='back'){
-      const i = PIPELINE.indexOf(a.status);
-      if(i>0) moveAgent(a.id,PIPELINE[i-1]);
-    }
+    else if(act==='back'){ const i = PIPELINE.indexOf(a.status); if(i>0) moveAgent(a.id,PIPELINE[i-1]); }
   }));
 
-  // Wire up inline editing
   setupEditing();
 }
 
@@ -932,9 +1236,7 @@ $('#simulateBtn').addEventListener('click',()=>{
   const idx = PIPELINE.indexOf(pick.status);
   const newStatus = PIPELINE[idx+1];
   pick.status = newStatus;
-  if(newStatus==='Approved' && !pick.joined){
-    pick.joined = new Date().toISOString().slice(0,10);
-  }
+  if(newStatus==='Approved' && !pick.joined) pick.joined = new Date().toISOString().slice(0,10);
   render();
   showToast(`Batch run: ${pick.name} advanced to ${newStatus}`);
 });
